@@ -7,4 +7,20 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="steel_gray">#191926</color>
+
+    <!--<editor-fold desc="Movie Details">-->
+    <color name="white_alpha_50">#80FFFFFF</color>
+    <color name="white_alpha_75">#BFFFFFFF</color>
+    <color name="black_alpha_25">#40000000</color>
+    <color name="black_alpha_50">#80000000</color>
+    <color name="steel_gray_alpha_0">#00191926</color>
+    <color name="steel_gray_alpha_1">#02191926</color>
+    <color name="steel_gray_alpha_50">#80191926</color>
+    <color name="storm_gray">#6D6D80</color>
+    <color name="radical_red">#FF3466</color>
+    <color name="alto">#D8D8D8</color>
+    <color name="gallery">#ECECEC</color>
+    <!--</editor-fold>-->
 </resources>

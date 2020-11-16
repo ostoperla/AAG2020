@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.AAG2020.TextView.MovieBack" parent="">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white_alpha_50</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.TextView.MovieName" parent="">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/gallery</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:shadowColor">@color/black_alpha_50</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">6</item>
+        <item name="android:shadowRadius">12</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.TextView.MovieTagLine" parent="">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/radical_red</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.TextView.MovieReviews" parent="">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/storm_gray</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.TextView.MovieStoryline" parent="">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gallery</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:shadowColor">@color/black_alpha_50</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">6</item>
+        <item name="android:shadowRadius">12</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.TextView.MovieStorylineContent" parent="">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white_alpha_75</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.TextView.MovieCast" parent="">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gallery</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:shadowColor">@color/black_alpha_50</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">6</item>
+        <item name="android:shadowRadius">12</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.TextView.ActorName" parent="">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/alto</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+</resources>

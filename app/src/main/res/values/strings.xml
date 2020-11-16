@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">AAG2020</string>
+
+    <string name="action_start_movie_details">Movie Details</string>
+
+    <!--<editor-fold desc="Movie Details">-->
+    <string name="movie_back_title">Back</string>
+    <string name="movie_storyline_title">Storyline</string>
+    <string name="movie_cast_title">Cast</string>
+    <!--Fake-->
+    <string name="movie_name_msg">Avengers:\nEnd Game</string>
+    <string name="movie_tags_msg">Action, Adventure, Fantasy</string>
+    <string name="movie_reviews_msg">125 Reviews</string>
+    <string name="movie_storyline_msg">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
+    <string name="actor_robert_downey_jr_title">Robert Downey Jr.</string>
+    <string name="actor_chris_hemsworth_title">Chris Hemsworth</string>
+    <string name="actor_mark_ruffalo_title">Mark Ruffalo</string>
+    <string name="actor_chris_evan_title">Chris Evan</string>
+    <!--</editor-fold>-->
 </resources>

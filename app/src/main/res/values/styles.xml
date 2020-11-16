@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--<editor-fold desc="TextView">-->
+    <style name="Widget.AAG2020.TextView.MovieBack" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="lineHeight">16sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="drawableStartCompat">@drawable/ic_arrow_back</item>
+        <item name="drawableTint">@color/storm_gray</item>
+        <item name="android:drawablePadding">@dimen/text_back_compound_drawable_padding</item>
+    </style>
+
+    <style name="Widget.AAG2020.TextView.MovieName" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center_vertical</item>
+        <item name="lineHeight">40sp</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+    </style>
+
+    <style name="Widget.AAG2020.TextView.MovieTagline" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center_vertical</item>
+        <item name="lineHeight">20sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="Widget.AAG2020.TextView.MovieReviews" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center_vertical</item>
+        <item name="lineHeight">20sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="Widget.AAG2020.TextView.MovieStoryline" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center_vertical</item>
+        <item name="lineHeight">20sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="Widget.AAG2020.TextView.MovieStorylineContent" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center_vertical</item>
+        <item name="lineHeight">20sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="Widget.AAG2020.TextView.MovieCast" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center_vertical</item>
+        <item name="lineHeight">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+    </style>
+
+    <style name="Widget.AAG2020.TextView.ActorName" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center_vertical</item>
+        <item name="lineHeight">16sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+    </style>
+    <!--</editor-fold>-->
+
+    <!--<editor-fold desc="ImageView">-->
+    <style name="Widget.AAG2020.ImageView.MovieLogo" parent="">
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:baselineAlignBottom">true</item>
+    </style>
+
+    <style name="Widget.AAG2020.ImageView.IconStar.RadicalRed" parent="">
+        <item name="tint">@color/radical_red</item>
+    </style>
+
+    <style name="Widget.AAG2020.ImageView.IconStar.StormGray" parent="">
+        <item name="tint">@color/storm_gray</item>
+    </style>
+
+    <style name="Widget.AAG2020.ImageView.Actor" parent="">
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+    <!--</editor-fold>-->
+</resources>

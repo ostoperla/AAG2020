@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ShapeAppearanceOverlay.AAG2020.ImageView.Actor" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/image_actor_shape_corner_size</item>
+    </style>
+
+    <dimen name="image_actor_shape_corner_size">4dp</dimen>
+</resources>
