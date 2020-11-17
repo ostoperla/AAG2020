@@ -71,7 +71,6 @@
 
     <style name="Widget.AAG2020.ImageView.Actor" parent="">
         <item name="android:scaleType">centerCrop</item>
-        <item name="android:adjustViewBounds">true</item>
     </style>
     <!--</editor-fold>-->
 </resources>
