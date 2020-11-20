@@ -4,53 +4,53 @@
     <!--<editor-fold desc="TextView">-->
     <style name="Widget.AAG2020.TextView.MovieBack" parent="Widget.MaterialComponents.TextView">
         <item name="android:gravity">center_horizontal|center_vertical</item>
-        <item name="lineHeight">16sp</item>
-        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="lineHeight">@dimen/line_height_16</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra_2</item>
         <item name="drawableStartCompat">@drawable/ic_arrow_back</item>
         <item name="drawableTint">@color/storm_gray</item>
-        <item name="android:drawablePadding">@dimen/text_back_compound_drawable_padding</item>
+        <item name="android:drawablePadding">@dimen/margin_8</item>
     </style>
 
     <style name="Widget.AAG2020.TextView.MovieName" parent="Widget.MaterialComponents.TextView">
         <item name="android:gravity">center_vertical</item>
-        <item name="lineHeight">40sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
+        <item name="lineHeight">@dimen/line_height_40</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra_0</item>
     </style>
 
     <style name="Widget.AAG2020.TextView.MovieTagline" parent="Widget.MaterialComponents.TextView">
         <item name="android:gravity">center_vertical</item>
-        <item name="lineHeight">20sp</item>
-        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="lineHeight">@dimen/line_height_20</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra_4</item>
     </style>
 
     <style name="Widget.AAG2020.TextView.MovieReviews" parent="Widget.MaterialComponents.TextView">
         <item name="android:gravity">center_vertical</item>
-        <item name="lineHeight">20sp</item>
-        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="lineHeight">@dimen/line_height_20</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra_4</item>
     </style>
 
     <style name="Widget.AAG2020.TextView.MovieStoryline" parent="Widget.MaterialComponents.TextView">
         <item name="android:gravity">center_vertical</item>
-        <item name="lineHeight">20sp</item>
-        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="lineHeight">@dimen/line_height_20</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra_4</item>
     </style>
 
     <style name="Widget.AAG2020.TextView.MovieStorylineContent" parent="Widget.MaterialComponents.TextView">
         <item name="android:gravity">center_vertical</item>
-        <item name="lineHeight">20sp</item>
-        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="lineHeight">@dimen/line_height_20</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra_4</item>
     </style>
 
     <style name="Widget.AAG2020.TextView.MovieCast" parent="Widget.MaterialComponents.TextView">
         <item name="android:gravity">center_vertical</item>
-        <item name="lineHeight">24sp</item>
-        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="lineHeight">@dimen/line_height_24</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra_8</item>
     </style>
 
     <style name="Widget.AAG2020.TextView.ActorName" parent="Widget.MaterialComponents.TextView">
         <item name="android:gravity">center_vertical</item>
-        <item name="lineHeight">16sp</item>
-        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="lineHeight">@dimen/line_height_16</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra_2</item>
     </style>
     <!--</editor-fold>-->
 

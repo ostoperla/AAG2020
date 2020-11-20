@@ -42,17 +42,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:foreground="@drawable/image_movie_logo_mask"
             app:srcCompat="@drawable/image_movie_logo" />
-
-        <View
-            android:id="@+id/image_movie_logo_mask"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/image_movie_logo_mask"
-            app:layout_constraintBottom_toBottomOf="@id/image_movie_logo"
-            app:layout_constraintEnd_toEndOf="@id/image_movie_logo"
-            app:layout_constraintStart_toStartOf="@id/image_movie_logo"
-            app:layout_constraintTop_toTopOf="@id/image_movie_logo" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_movie_back"

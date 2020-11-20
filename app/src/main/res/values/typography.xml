@@ -2,13 +2,13 @@
 <resources>
 
     <style name="TextAppearance.AAG2020.TextView.MovieBack" parent="">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:textColor">@color/white_alpha_50</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="TextAppearance.AAG2020.TextView.MovieName" parent="">
-        <item name="android:textSize">40sp</item>
+        <item name="android:textSize">@dimen/text_size_40</item>
         <item name="android:textColor">@color/gallery</item>
         <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">-0.01</item>
@@ -19,20 +19,20 @@
     </style>
 
     <style name="TextAppearance.AAG2020.TextView.MovieTagLine" parent="">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/radical_red</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="TextAppearance.AAG2020.TextView.MovieReviews" parent="">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/storm_gray</item>
         <item name="textAllCaps">true</item>
     </style>
 
     <style name="TextAppearance.AAG2020.TextView.MovieStoryline" parent="">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/gallery</item>
         <item name="android:textStyle">normal</item>
         <item name="android:shadowColor">@color/black_alpha_50</item>
@@ -42,13 +42,13 @@
     </style>
 
     <style name="TextAppearance.AAG2020.TextView.MovieStorylineContent" parent="">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/white_alpha_75</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="TextAppearance.AAG2020.TextView.MovieCast" parent="">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/gallery</item>
         <item name="android:textStyle">normal</item>
         <item name="android:letterSpacing">-0.01</item>
@@ -59,8 +59,24 @@
     </style>
 
     <style name="TextAppearance.AAG2020.TextView.ActorName" parent="">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:textColor">@color/alto</item>
         <item name="android:textStyle">normal</item>
     </style>
+
+    <!--Dimens-->
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_40">40sp</dimen>
+
+    <dimen name="line_height_16">16sp</dimen>
+    <dimen name="line_height_20">20sp</dimen>
+    <dimen name="line_height_24">24sp</dimen>
+    <dimen name="line_height_40">40sp</dimen>
+
+    <dimen name="line_spacing_extra_0">0sp</dimen>
+    <dimen name="line_spacing_extra_2">2sp</dimen>
+    <dimen name="line_spacing_extra_4">4sp</dimen>
+    <dimen name="line_spacing_extra_8">8sp</dimen>
+    <!--</editor-fold>-->
 </resources>

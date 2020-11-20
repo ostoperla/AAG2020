@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="default_margin_16">16dp</dimen>
-    <dimen name="default_margin_8">8dp</dimen>
+    <!--<editor-fold desc="Common">-->
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <!--</editor-fold>-->
 
     <!--<editor-fold desc="Movie screen">-->
     <dimen name="text_back_margin_start">18dp</dimen>
     <dimen name="text_back_margin_top">56dp</dimen>
-    <dimen name="text_back_compound_drawable_padding">8dp</dimen>
-    <dimen name="text_movie_name_elevation">4dp</dimen>
-    <dimen name="text_movie_tags_margin_top">4dp</dimen>
-    <dimen name="text_movie_reviews_margin_start">8dp</dimen>
-    <dimen name="text_movie_storyline_margin_top">24dp</dimen>
-    <dimen name="text_movie_storyline_content_margin_top">4dp</dimen>
-    <dimen name="text_movie_cast_margin_top">24dp</dimen>
     <dimen name="text_actor_name_margin_top">6dp</dimen>
-    <dimen name="text_actor_name_margin_bottom">8dp</dimen>
-    <dimen name="image_movie_rating_system_margin_bottom">8dp</dimen>
-    <dimen name="image_star_margin_top">8dp</dimen>
     <dimen name="image_star_margin_start">3dp</dimen>
     <dimen name="image_actor_margin_top">7dp</dimen>
-    <dimen name="image_actor_margin_start">8dp</dimen>
+
+    <dimen name="text_movie_name_elevation">4dp</dimen>
     <!--</editor-fold>-->
 </resources>

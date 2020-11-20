@@ -7,6 +7,8 @@
     <string name="movie_back_title">Back</string>
     <string name="movie_storyline_title">Storyline</string>
     <string name="movie_cast_title">Cast</string>
+    <string name="movie_logo_description">Movie logo</string>
+    <string name="movie_rating_system_description">Movie rating system</string>
     <!--Fake-->
     <string name="movie_name_msg">Avengers:\nEnd Game</string>
     <string name="movie_tags_msg">Action, Adventure, Fantasy</string>
