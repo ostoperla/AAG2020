@@ -34,7 +34,7 @@
     <style name="TextAppearance.AAG2020.TextView.MovieStoryline" parent="">
         <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/gallery</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:shadowColor">@color/black_alpha_50</item>
         <item name="android:shadowDx">0</item>
         <item name="android:shadowDy">6</item>
@@ -50,7 +50,7 @@
     <style name="TextAppearance.AAG2020.TextView.MovieCast" parent="">
         <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/gallery</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">-0.01</item>
         <item name="android:shadowColor">@color/black_alpha_50</item>
         <item name="android:shadowDx">0</item>
@@ -61,22 +61,12 @@
     <style name="TextAppearance.AAG2020.TextView.ActorName" parent="">
         <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:textColor">@color/alto</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <!--Dimens-->
-    <dimen name="text_size_12">12sp</dimen>
-    <dimen name="text_size_14">14sp</dimen>
-    <dimen name="text_size_40">40sp</dimen>
-
-    <dimen name="line_height_16">16sp</dimen>
-    <dimen name="line_height_20">20sp</dimen>
-    <dimen name="line_height_24">24sp</dimen>
-    <dimen name="line_height_40">40sp</dimen>
-
-    <dimen name="line_spacing_extra_0">0sp</dimen>
-    <dimen name="line_spacing_extra_2">2sp</dimen>
-    <dimen name="line_spacing_extra_4">4sp</dimen>
-    <dimen name="line_spacing_extra_8">8sp</dimen>
-    <!--</editor-fold>-->
+    <style name="TextAppearance.AAG2020.TextView.MovieRatingSystem" parent="">
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

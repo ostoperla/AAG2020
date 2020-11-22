@@ -5,8 +5,4 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/image_actor_shape_corner_size</item>
     </style>
-
-    <!--<editor-fold desc="Dimens">-->
-    <dimen name="image_actor_shape_corner_size">4dp</dimen>
-    <!--</editor-fold>-->
 </resources>

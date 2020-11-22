@@ -8,7 +8,6 @@
     <string name="movie_storyline_title">Storyline</string>
     <string name="movie_cast_title">Cast</string>
     <string name="movie_logo_description">Movie logo</string>
-    <string name="movie_rating_system_description">Movie rating system</string>
     <!--Fake-->
     <string name="movie_name_msg">Avengers:\nEnd Game</string>
     <string name="movie_tags_msg">Action, Adventure, Fantasy</string>
@@ -18,5 +17,6 @@
     <string name="actor_chris_hemsworth_title">Chris Hemsworth</string>
     <string name="actor_mark_ruffalo_title">Mark Ruffalo</string>
     <string name="actor_chris_evan_title">Chris Evan</string>
+    <string name="movie_age_rating">13+</string>
     <!--</editor-fold>-->
 </resources>
