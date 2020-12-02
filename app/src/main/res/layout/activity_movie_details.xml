@@ -90,7 +90,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_movie_tags"
-            style="@style/Widget.AAG2020.TextView.MovieTagline"
+            style="@style/Widget.AAG2020.TextView.CenterVertical.Medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_tiny"
@@ -166,7 +166,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_movie_reviews"
-            style="@style/Widget.AAG2020.TextView.MovieReviews"
+            style="@style/Widget.AAG2020.TextView.CenterVertical.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_small"
@@ -178,7 +178,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_movie_storyline"
-            style="@style/Widget.AAG2020.TextView.MovieStoryline"
+            style="@style/Widget.AAG2020.TextView.CenterVertical.Medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
@@ -190,7 +190,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_movie_storyline_content"
-            style="@style/Widget.AAG2020.TextView.MovieStorylineContent"
+            style="@style/Widget.AAG2020.TextView.CenterVertical.Medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_tiny"
