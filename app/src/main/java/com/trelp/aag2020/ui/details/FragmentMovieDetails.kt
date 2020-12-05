@@ -1,6 +1,6 @@
 package com.trelp.aag2020.ui.details
 
-import androidx.fragment.app.Fragment
 import com.trelp.aag2020.R
+import com.trelp.aag2020.ui.common.BaseFragment
 
-class FragmentMovieDetails : Fragment(R.layout.fragment_movie_details)
+class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details)
