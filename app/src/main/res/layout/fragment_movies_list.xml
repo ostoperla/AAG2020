@@ -13,7 +13,7 @@
         android:layout_marginStart="@dimen/margin_normal"
         android:layout_marginTop="@dimen/fake_movies_header_margin_top"
         android:text="@string/movies_list_title"
-        android:textAppearance="@style/TextAppearance.AAG2020.TextView.MoviesList.Header" />
+        android:textAppearance="@style/TextAppearance.AAG2020.Headline1" />
 
     <include
         android:id="@+id/item_movie"

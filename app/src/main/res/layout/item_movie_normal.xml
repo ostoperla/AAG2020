@@ -34,7 +34,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_movie_logo"
-            style="@style/Widget.AAG2020.ImageView.ItemMovie"
+            style="@style/Widget.AAG2020.ImageView.CenterCrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_extra_tiny"
@@ -65,8 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:text="@string/movie_age_rating"
-            android:textAppearance="@style/TextAppearance.AAG2020.TextView.MovieRatingSystem"
-            app:layout_constraintStart_toStartOf="@+id/guideline_root_left"
+            android:textAppearance="@style/TextAppearance.AAG2020.Caption1.White"
+            app:layout_constraintStart_toStartOf="@id/guideline_root_left"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -75,37 +75,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/movie_like_description"
-            app:layout_constraintBottom_toBottomOf="@+id/text_movie_rating_system"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_root_right"
-            app:layout_constraintTop_toTopOf="@+id/text_movie_rating_system"
+            app:layout_constraintBottom_toBottomOf="@id/text_movie_rating_system"
+            app:layout_constraintEnd_toStartOf="@id/guideline_root_right"
+            app:layout_constraintTop_toTopOf="@id/text_movie_rating_system"
             app:srcCompat="@drawable/ic_like" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_movie_tags"
-            style="@style/Widget.AAG2020.TextView.MovieTags"
+            style="@style/Widget.AAG2020.TextView.CenterVertical.Normal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_normal"
             android:layout_marginBottom="@dimen/margin_tiny"
             android:text="@string/movie_tenet_tags_msg"
             android:textAppearance="@style/TextAppearance.AAG2020.TextView.MoviesTags"
-            app:layout_constraintBottom_toTopOf="@+id/rating"
+            app:layout_constraintBottom_toTopOf="@id/rating"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline_root_left" />
+            app:layout_constraintStart_toStartOf="@id/guideline_root_left" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_movie_reviews"
-            style="@style/Widget.AAG2020.TextView.MovieReviews"
+            style="@style/Widget.AAG2020.TextView.CenterVertical.Normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_extra_small"
             android:layout_marginTop="@dimen/margin_extra_tiny"
             android:layout_marginBottom="@dimen/margin_small"
             android:text="@string/movie_tenet_reviews_msg"
-            android:textAppearance="@style/TextAppearance.AAG2020.TextView.MoviesReviews"
-            app:layout_constraintBottom_toBottomOf="@+id/image_movie_logo"
-            app:layout_constraintStart_toEndOf="@+id/rating"
-            app:layout_constraintTop_toBottomOf="@+id/text_movie_tags" />
+            android:textAppearance="@style/TextAppearance.AAG2020.Overline1.StormGray"
+            app:layout_constraintBottom_toBottomOf="@id/image_movie_logo"
+            app:layout_constraintStart_toEndOf="@id/rating"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_tags" />
 
         <RatingBar
             android:id="@+id/rating"
@@ -118,13 +118,13 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_movie_name"
-            style="@style/Widget.AAG2020.TextView.MoviesName"
+            style="@style/Widget.AAG2020.TextView.CenterVertical.Medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:text="@string/movie_tenet_msg"
-            android:textAppearance="@style/TextAppearance.AAG2020.TextView.MoviesName"
-            app:layout_constraintBottom_toTopOf="@+id/text_movie_duration"
+            android:textAppearance="@style/TextAppearance.AAG2020.Headline1"
+            app:layout_constraintBottom_toTopOf="@id/text_movie_duration"
             app:layout_constraintEnd_toEndOf="@id/guideline_root_right"
             app:layout_constraintStart_toStartOf="@id/guideline_root_left"
             app:layout_constraintTop_toBottomOf="@id/image_movie_logo" />
@@ -133,13 +133,13 @@
             android:id="@+id/text_movie_duration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/Widget.AAG2020.TextView.MovieDuration"
+            style="@style/Widget.AAG2020.TextView.CenterVertical.Normal"
             android:text="@string/movie_tenet_duration_msg"
-            android:textAppearance="@style/Base.TextAppearance.AAG2020.MoviesDuration"
+            android:textAppearance="@style/TextAppearance.AAG2020.Overline1.ScarpaFlow"
             app:layout_constraintBottom_toBottomOf="@id/guideline_root_bottom"
             app:layout_constraintEnd_toEndOf="@id/guideline_root_right"
             app:layout_constraintStart_toStartOf="@id/guideline_root_left"
-            app:layout_constraintTop_toBottomOf="@+id/text_movie_name" />
+            app:layout_constraintTop_toBottomOf="@id/text_movie_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
