@@ -5,4 +5,16 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/image_actor_shape_corner_size</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.AAG2020.CardView.Movie" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/card_movie_shape_corner_size</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.AAG2020.ImageView.Movie" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/image_movie_logo_shape_corner_size</item>
+        <item name="cornerSizeBottomLeft">@dimen/default_shape_corner_size</item>
+        <item name="cornerSizeBottomRight">@dimen/default_shape_corner_size</item>
+    </style>
 </resources>

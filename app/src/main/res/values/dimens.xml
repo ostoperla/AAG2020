@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--<editor-fold desc="Common">-->
+    <dimen name="margin_extra_tiny">2dp</dimen>
     <dimen name="margin_tiny">4dp</dimen>
+    <dimen name="margin_extra_small">6dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
@@ -11,11 +13,22 @@
     <dimen name="text_back_margin_top">56dp</dimen>
     <!--</editor-fold>-->
 
+    <!--<editor-fold desc="Movies screen">-->
+    <dimen name="fake_movies_header_margin_top">55dp</dimen>
+    <dimen name="fake_item_movie_width">170dp</dimen>
+    <dimen name="fake_item_movie_height">296dp</dimen>
+    <dimen name="fake_item_movie_margin_start">12dp</dimen>
+    <dimen name="fake_item_movie_margin_top">27dp</dimen>
+    <dimen name="item_movie_rating_margin_bottom">10dp</dimen>
+    <!--</editor-fold>-->
+
     <!--<editor-fold desc="Typo">-->
+    <dimen name="text_size_8">8sp</dimen>
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_40">40sp</dimen>
 
+    <dimen name="line_height_12">12sp</dimen>
     <dimen name="line_height_14">14sp</dimen>
     <dimen name="line_height_16">16sp</dimen>
     <dimen name="line_height_20">20sp</dimen>
@@ -24,11 +37,17 @@
 
     <dimen name="line_spacing_extra_0">0sp</dimen>
     <dimen name="line_spacing_extra_2">2sp</dimen>
+    <dimen name="line_spacing_extra_3">3sp</dimen>
     <dimen name="line_spacing_extra_4">4sp</dimen>
     <dimen name="line_spacing_extra_8">8sp</dimen>
     <!--</editor-fold>-->
 
     <!--<editor-fold desc="Shape">-->
+    <dimen name="default_shape_corner_size">0dp</dimen>
     <dimen name="image_actor_shape_corner_size">4dp</dimen>
+    <dimen name="card_movie_shape_corner_size">8dp</dimen>
+    <dimen name="image_movie_logo_shape_corner_size">6dp</dimen>
     <!--</editor-fold>-->
+
+    <dimen name="stroke_width">1dp</dimen>
 </resources>

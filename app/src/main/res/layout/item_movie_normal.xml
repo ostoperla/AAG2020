@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.AAG2020.CardView.Movie"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.AAG2020.CardView.Movie">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/item_movie_background">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_root_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/margin_small" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_root_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/margin_small" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_root_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/margin_small" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_movie_logo"
+            style="@style/Widget.AAG2020.ImageView.ItemMovie"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_extra_tiny"
+            android:layout_marginTop="@dimen/margin_extra_tiny"
+            android:layout_marginEnd="@dimen/margin_extra_tiny"
+            android:contentDescription="@string/movie_logo_description"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.AAG2020.ImageView.Movie"
+            app:srcCompat="@drawable/image_movie_tenet" />
+
+        <View
+            android:id="@+id/image_movie_logo_mask"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/image_movie_logo_mask"
+            app:layout_constraintBottom_toBottomOf="@id/image_movie_logo"
+            app:layout_constraintEnd_toEndOf="@id/image_movie_logo"
+            app:layout_constraintStart_toStartOf="@id/image_movie_logo"
+            app:layout_constraintTop_toTopOf="@id/image_movie_logo" />
+
+        <TextView
+            android:id="@+id/text_movie_rating_system"
+            style="@style/Widget.AAG2020.TextView.MovieRatingSystem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/movie_age_rating"
+            android:textAppearance="@style/TextAppearance.AAG2020.TextView.MovieRatingSystem"
+            app:layout_constraintStart_toStartOf="@+id/guideline_root_left"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/image_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/movie_like_description"
+            app:layout_constraintBottom_toBottomOf="@+id/text_movie_rating_system"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_root_right"
+            app:layout_constraintTop_toTopOf="@+id/text_movie_rating_system"
+            app:srcCompat="@drawable/ic_like" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_movie_tags"
+            style="@style/Widget.AAG2020.TextView.MovieTags"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_tiny"
+            android:text="@string/movie_tenet_tags_msg"
+            android:textAppearance="@style/TextAppearance.AAG2020.TextView.MoviesTags"
+            app:layout_constraintBottom_toTopOf="@+id/rating"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_root_left" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_movie_reviews"
+            style="@style/Widget.AAG2020.TextView.MovieReviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_extra_small"
+            android:layout_marginTop="@dimen/margin_extra_tiny"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:text="@string/movie_tenet_reviews_msg"
+            android:textAppearance="@style/TextAppearance.AAG2020.TextView.MoviesReviews"
+            app:layout_constraintBottom_toBottomOf="@+id/image_movie_logo"
+            app:layout_constraintStart_toEndOf="@+id/rating"
+            app:layout_constraintTop_toBottomOf="@+id/text_movie_tags" />
+
+        <RatingBar
+            android:id="@+id/rating"
+            style="@style/Widget.AAG2020.RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_movie_rating_margin_bottom"
+            app:layout_constraintBottom_toBottomOf="@id/image_movie_logo"
+            app:layout_constraintStart_toStartOf="@id/guideline_root_left" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_movie_name"
+            style="@style/Widget.AAG2020.TextView.MoviesName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/movie_tenet_msg"
+            android:textAppearance="@style/TextAppearance.AAG2020.TextView.MoviesName"
+            app:layout_constraintBottom_toTopOf="@+id/text_movie_duration"
+            app:layout_constraintEnd_toEndOf="@id/guideline_root_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_root_left"
+            app:layout_constraintTop_toBottomOf="@id/image_movie_logo" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_movie_duration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AAG2020.TextView.MovieDuration"
+            android:text="@string/movie_tenet_duration_msg"
+            android:textAppearance="@style/Base.TextAppearance.AAG2020.MoviesDuration"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_root_bottom"
+            app:layout_constraintEnd_toEndOf="@id/guideline_root_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_root_left"
+            app:layout_constraintTop_toBottomOf="@+id/text_movie_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
