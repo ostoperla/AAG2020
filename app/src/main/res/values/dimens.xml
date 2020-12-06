@@ -50,4 +50,6 @@
     <!--</editor-fold>-->
 
     <dimen name="stroke_width">1dp</dimen>
+    <dimen name="image_actor_width">80dp</dimen>
+    <dimen name="image_actor_height">80dp</dimen>
 </resources>

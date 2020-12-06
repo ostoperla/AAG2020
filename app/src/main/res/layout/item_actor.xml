@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:layout_marginEnd="@dimen/margin_small">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_actor_photo"
+        style="@style/Widget.AAG2020.ImageView.CenterCrop"
+        android:layout_width="@dimen/image_actor_width"
+        android:layout_height="@dimen/image_actor_height"
+        android:contentDescription="@null"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.AAG2020.ImageView.Actor"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_actor_name"
+        style="@style/Widget.AAG2020.TextView.ActorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:textAppearance="@style/TextAppearance.AAG2020.Caption1.Alto"
+        app:layout_constraintEnd_toEndOf="@id/image_actor_photo"
+        app:layout_constraintStart_toStartOf="@id/image_actor_photo"
+        app:layout_constraintTop_toBottomOf="@+id/image_actor_photo"
+        tools:text="@tools:sample/full_names" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
