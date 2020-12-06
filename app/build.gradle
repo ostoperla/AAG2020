@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     // MC
     implementation 'com.google.android.material:material:1.2.1'
     // Tests
