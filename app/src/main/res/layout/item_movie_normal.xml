@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.AAG2020.CardView.Movie"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.AAG2020.ImageView.Movie"
-            app:srcCompat="@drawable/image_movie_tenet" />
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <View
             android:id="@+id/image_movie_logo_mask"
@@ -64,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            android:text="@string/movie_age_rating"
+            tools:text="13+"
             android:textAppearance="@style/TextAppearance.AAG2020.Caption1.White"
             app:layout_constraintStart_toStartOf="@id/guideline_root_left"
             app:layout_constraintTop_toTopOf="parent" />
@@ -87,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_normal"
             android:layout_marginBottom="@dimen/margin_tiny"
-            android:text="@string/movie_tenet_tags_msg"
+            tools:text="Action, Sci-Fi, Thriller"
             android:textAppearance="@style/TextAppearance.AAG2020.TextView.MoviesTags"
             app:layout_constraintBottom_toTopOf="@id/rating"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +102,7 @@
             android:layout_marginStart="@dimen/margin_extra_small"
             android:layout_marginTop="@dimen/margin_extra_tiny"
             android:layout_marginBottom="@dimen/margin_small"
-            android:text="@string/movie_tenet_reviews_msg"
+            tools:text="98 reviews"
             android:textAppearance="@style/TextAppearance.AAG2020.Overline1.StormGray"
             app:layout_constraintBottom_toBottomOf="@id/image_movie_logo"
             app:layout_constraintStart_toEndOf="@id/rating"
@@ -122,7 +123,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            android:text="@string/movie_tenet_msg"
+            tools:text="Black Widow"
             android:textAppearance="@style/TextAppearance.AAG2020.Headline1"
             app:layout_constraintBottom_toTopOf="@id/text_movie_duration"
             app:layout_constraintEnd_toEndOf="@id/guideline_root_right"
@@ -134,7 +135,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             style="@style/Widget.AAG2020.TextView.CenterVertical.Normal"
-            android:text="@string/movie_tenet_duration_msg"
+            tools:text="97 min"
             android:textAppearance="@style/TextAppearance.AAG2020.Overline1.ScarpaFlow"
             app:layout_constraintBottom_toBottomOf="@id/guideline_root_bottom"
             app:layout_constraintEnd_toEndOf="@id/guideline_root_right"
