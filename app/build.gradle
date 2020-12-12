@@ -55,6 +55,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     // MC
     implementation 'com.google.android.material:material:1.2.1'
+    // Debug
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
     // Tests
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
