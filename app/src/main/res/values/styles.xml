@@ -79,7 +79,7 @@
     <!--<editor-fold desc="CardView">-->
     <style name="Widget.AAG2020.CardView.Movie" parent="Widget.MaterialComponents.CardView">
         <item name="strokeColor">@color/mid_gray_alpha_50</item>
-        <item name="strokeWidth">@dimen/stroke_width</item>
+        <item name="strokeWidth">@dimen/stroke_width_1</item>
     </style>
     <!--</editor-fold>-->
 

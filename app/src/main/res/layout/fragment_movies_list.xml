@@ -21,6 +21,6 @@
         android:layout_width="@dimen/fake_item_movie_width"
         android:layout_height="@dimen/fake_item_movie_height"
         android:layout_marginStart="@dimen/fake_item_movie_margin_start"
-        android:layout_marginTop="@dimen/fake_item_movie_margin_top" />
+        android:layout_marginTop="@dimen/margin_extra_large" />
 
 </LinearLayout>

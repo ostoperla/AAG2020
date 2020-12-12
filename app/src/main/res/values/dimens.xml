@@ -7,6 +7,7 @@
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_extra_large">32dp</dimen>
     <!--</editor-fold>-->
 
     <!--<editor-fold desc="Movie screen">-->
@@ -18,7 +19,6 @@
     <dimen name="fake_item_movie_width">170dp</dimen>
     <dimen name="fake_item_movie_height">296dp</dimen>
     <dimen name="fake_item_movie_margin_start">12dp</dimen>
-    <dimen name="fake_item_movie_margin_top">27dp</dimen>
     <dimen name="item_movie_rating_margin_bottom">10dp</dimen>
     <!--</editor-fold>-->
 
@@ -43,11 +43,11 @@
     <!--</editor-fold>-->
 
     <!--<editor-fold desc="Shape">-->
-    <dimen name="default_shape_corner_size">0dp</dimen>
-    <dimen name="image_actor_shape_corner_size">4dp</dimen>
-    <dimen name="card_movie_shape_corner_size">8dp</dimen>
-    <dimen name="image_movie_logo_shape_corner_size">6dp</dimen>
+    <dimen name="default_corner_size">0dp</dimen>
+    <dimen name="corner_size_4">4dp</dimen>
+    <dimen name="corner_size_6">6dp</dimen>
+    <dimen name="corner_size_8">8dp</dimen>
     <!--</editor-fold>-->
 
-    <dimen name="stroke_width">1dp</dimen>
+    <dimen name="stroke_width_1">1dp</dimen>
 </resources>
