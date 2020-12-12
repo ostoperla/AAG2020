@@ -6,7 +6,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
 import com.trelp.aag2020.data.MoviesDataSource
 import com.trelp.aag2020.data.isSame
@@ -20,13 +19,17 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
     private val binding
         get() = viewBinding!! as FragmentMoviesListBinding
 
-    private val dataSource = MoviesDataSource()
-    private lateinit var movieAdapter: MovieAdapter
-
     private val itemClickListener = object : MovieAdapter.OnItemClickListener {
         override fun onItemClick(movieId: Int) {
             navigateToMovieDetails(movieId)
         }
+    }
+
+    private val movieAdapter by lazy {
+        MovieAdapter(
+            { old, new -> old.isSame(new) },
+            itemClickListener
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,22 +37,19 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
 
         viewBinding = FragmentMoviesListBinding.bind(view)
 
-        initMoviesList(binding.listMovie)
+        initMoviesList()
     }
 
     override fun onStart() {
         super.onStart()
 
-        movieAdapter.submitList(dataSource.movies)
+        movieAdapter.submitList(MoviesDataSource().movies)
     }
 
-    private fun initMoviesList(recyclerView: RecyclerView) {
-        with(recyclerView) {
+    private fun initMoviesList() {
+        with(binding.listMovie) {
             setHasFixedSize(true)
-            adapter = MovieAdapter(
-                { old, new -> old.isSame(new) },
-                itemClickListener
-            ).also { it.submitList(dataSource.movies) }
+            adapter = movieAdapter
             addItemDecoration(
                 MovieOffsetItemDecoration(context.dp2pxOffset(R.dimen.item_movie_offset))
             )

@@ -12,6 +12,7 @@ import com.trelp.aag2020.R
 import com.trelp.aag2020.data.MovieDetailsDataSource
 import com.trelp.aag2020.databinding.FragmentMovieDetailsBinding
 import com.trelp.aag2020.ui.common.BaseFragment
+import com.trelp.aag2020.ui.common.utils.dp2pxSize
 
 class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
@@ -19,6 +20,9 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
         get() = viewBinding!! as FragmentMovieDetailsBinding
 
     private var movieId: Int = 0
+
+    private val movieDetails by lazy { MovieDetailsDataSource().getMovieDetails(movieId) }
+    private val actorAdapter by lazy { ActorAdapter() }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,8 +37,6 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
         viewBinding = FragmentMovieDetailsBinding.bind(view)
 
-        val movieDetails = MovieDetailsDataSource().getMovieDetails(movieId)
-
         with(binding) {
             imageMovieLogo.setImageResource(movieDetails.poster)
             textMovieRatingSystem.text = movieDetails.ageLimit
@@ -48,17 +50,27 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
             textMovieStorylineContent.text = movieDetails.overview
         }
 
+        initActorsList()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        actorAdapter.setupData(movieDetails.actors)
+    }
+
+    private fun initActorsList() {
         with(binding.listActor) {
-            adapter = ActorAdapter().also { it.setupData(movieDetails.actors) }
+            adapter = actorAdapter
             addItemDecoration(
-                DividerItemDecoration(context, RecyclerView.HORIZONTAL).also {
+                DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL).also {
                     it.setSpaceDrawable(
-                        resources.getDimensionPixelOffset(R.dimen.item_actor_offset),
+                        context.dp2pxSize(R.dimen.item_actor_offset),
                         0
                     )
                 }
             )
-            layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         }
     }
 
