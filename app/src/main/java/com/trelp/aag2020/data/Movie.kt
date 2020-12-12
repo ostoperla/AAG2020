@@ -25,3 +25,5 @@ data class MovieDetails(
     val overview: String,
     val actors: List<Actor>
 )
+
+fun Movie.isSame(other: Movie) = id == other.id

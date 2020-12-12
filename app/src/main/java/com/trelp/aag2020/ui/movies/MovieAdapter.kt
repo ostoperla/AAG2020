@@ -5,15 +5,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
 import com.trelp.aag2020.data.Movie
 import com.trelp.aag2020.databinding.ItemMovieNormalBinding
+import com.trelp.aag2020.ui.common.adapter.AsyncListDifferAdapter
 import com.trelp.aag2020.ui.common.utils.context
 import com.trelp.aag2020.ui.common.utils.inflater
 import com.trelp.aag2020.ui.common.utils.tint
+import com.trelp.aag2020.ui.movies.MovieAdapter.MovieHolder
 
 class MovieAdapter(
+    itemDiff: (old: Movie, new: Movie) -> Boolean,
     private val itemClickListener: OnItemClickListener
-) : RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
-
-    private var data = listOf<Movie>()
+) : AsyncListDifferAdapter<Movie, MovieHolder>(itemDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
         return MovieHolder(
@@ -23,16 +24,9 @@ class MovieAdapter(
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         with(holder) {
-            bind(data[position])
-            itemView.setOnClickListener { itemClickListener.onItemClick(data[position].id) }
+            bind(getItem(position))
+            itemView.setOnClickListener { itemClickListener.onItemClick(getItem(position).id) }
         }
-    }
-
-    override fun getItemCount(): Int = data.size
-
-    fun setupData(newData: List<Movie>) {
-        data = newData
-        notifyDataSetChanged()
     }
 
     class MovieHolder(
