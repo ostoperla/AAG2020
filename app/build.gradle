@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
@@ -59,6 +60,9 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     // MC
     implementation 'com.google.android.material:material:1.2.1'
+    // Image load and cache
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
     // Debug
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
     // Tests
