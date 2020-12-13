@@ -1,8 +1,7 @@
 package com.trelp.aag2020.data
 
-import androidx.annotation.DrawableRes
-
 data class Actor(
-    @DrawableRes val photo: Int,
-    val name: String
+    val id: Int,
+    val name: String,
+    val picture: String
 )

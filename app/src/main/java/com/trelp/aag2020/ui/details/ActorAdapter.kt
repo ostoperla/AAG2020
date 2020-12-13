@@ -2,7 +2,7 @@ package com.trelp.aag2020.ui.details
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.trelp.aag2020.data.Actor
+import com.trelp.aag2020.data.tmp.Actor
 import com.trelp.aag2020.databinding.ItemActorBinding
 import com.trelp.aag2020.ui.common.utils.inflater
 

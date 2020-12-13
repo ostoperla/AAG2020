@@ -7,8 +7,8 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.MoviesDataSource
-import com.trelp.aag2020.data.isSame
+import com.trelp.aag2020.data.tmp.MoviesDataSource
+import com.trelp.aag2020.data.tmp.isSame
 import com.trelp.aag2020.databinding.FragmentMoviesListBinding
 import com.trelp.aag2020.ui.common.BaseFragment
 import com.trelp.aag2020.ui.common.utils.dp2pxOffset

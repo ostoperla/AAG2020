@@ -3,7 +3,7 @@ package com.trelp.aag2020.ui.movies
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.Movie
+import com.trelp.aag2020.data.tmp.Movie
 import com.trelp.aag2020.databinding.ItemMovieNormalBinding
 import com.trelp.aag2020.ui.common.adapter.AsyncListDifferAdapter
 import com.trelp.aag2020.ui.common.utils.context
