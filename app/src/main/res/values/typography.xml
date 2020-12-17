@@ -72,19 +72,53 @@
         <item name="android:shadowRadius">12</item>
     </style>
 
-    <style name="TextAppearance.AAG2020.TextView.ActorName" parent="">
+    <style name="TextAppearance.AAG2020.Headline1" parent="">
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:textStyle">normal</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.TextView.MoviesTags" parent="">
+        <item name="fontFamily">@font/roboto_light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_8</item>
+        <item name="android:textColor">@color/radical_red</item>
+    </style>
+
+    <!--<editor-fold desc="Caption">-->
+    <style name="Base.TextAppearance.AAG2020.Caption1" parent="">
         <item name="fontFamily">@font/roboto_black</item>
         <item name="android:textStyle">normal</item>
         <item name="textAllCaps">false</item>
         <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.Caption1.Alto" parent="Base.TextAppearance.AAG2020.Caption1">
         <item name="android:textColor">@color/alto</item>
     </style>
 
-    <style name="TextAppearance.AAG2020.TextView.MovieRatingSystem" parent="">
-        <item name="fontFamily">@font/roboto_black</item>
-        <item name="android:textStyle">normal</item>
-        <item name="textAllCaps">false</item>
-        <item name="android:textSize">@dimen/text_size_12</item>
+    <style name="TextAppearance.AAG2020.Caption1.White" parent="Base.TextAppearance.AAG2020.Caption1">
         <item name="android:textColor">@color/white</item>
     </style>
+    <!--</editor-fold>-->
+
+    <!--<editor-fold desc="Overline">-->
+    <style name="Base.TextAppearance.AAG2020.Overline1" parent="">
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:textStyle">normal</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textSize">@dimen/text_size_8</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.Overline1.StormGray" parent="Base.TextAppearance.AAG2020.Overline1">
+        <item name="android:textColor">@color/storm_gray</item>
+    </style>
+
+    <style name="TextAppearance.AAG2020.Overline1.ScarpaFlow" parent="Base.TextAppearance.AAG2020.Overline1">
+        <item name="android:textColor">@color/scarpa_flow</item>
+    </style>
+    <!--</editor-fold>-->
 </resources>

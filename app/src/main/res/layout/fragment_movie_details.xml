@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    tools:context=".MovieDetailsActivity">
+    tools:context=".ui.details.FragmentMovieDetails">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constr_container"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_small"
             android:text="@string/movie_age_rating"
-            android:textAppearance="@style/TextAppearance.AAG2020.TextView.MovieRatingSystem"
+            android:textAppearance="@style/TextAppearance.AAG2020.Caption1.White"
             app:layout_constraintBottom_toTopOf="@id/text_movie_name"
             app:layout_constraintStart_toEndOf="@id/guideline_root_left" />
 
@@ -214,7 +214,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_actor_photo_first"
-            style="@style/Widget.AAG2020.ImageView.Actor"
+            style="@style/Widget.AAG2020.ImageView.CenterCrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_small"
@@ -229,7 +229,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_actor_photo_second"
-            style="@style/Widget.AAG2020.ImageView.Actor"
+            style="@style/Widget.AAG2020.ImageView.CenterCrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_small"
@@ -244,7 +244,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_actor_photo_third"
-            style="@style/Widget.AAG2020.ImageView.Actor"
+            style="@style/Widget.AAG2020.ImageView.CenterCrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_small"
@@ -259,7 +259,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_actor_photo_fourth"
-            style="@style/Widget.AAG2020.ImageView.Actor"
+            style="@style/Widget.AAG2020.ImageView.CenterCrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_small"
@@ -279,7 +279,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:text="@string/actor_robert_downey_jr_title"
-            android:textAppearance="@style/TextAppearance.AAG2020.TextView.ActorName"
+            android:textAppearance="@style/TextAppearance.AAG2020.Caption1.Alto"
             app:layout_constraintBottom_toBottomOf="@id/guideline_root_bottom"
             app:layout_constraintEnd_toEndOf="@id/image_actor_photo_first"
             app:layout_constraintStart_toStartOf="@id/image_actor_photo_first"
@@ -291,7 +291,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/actor_chris_evan_title"
-            android:textAppearance="@style/TextAppearance.AAG2020.TextView.ActorName"
+            android:textAppearance="@style/TextAppearance.AAG2020.Caption1.Alto"
             app:layout_constraintBaseline_toBaselineOf="@id/text_actor_name_first"
             app:layout_constraintEnd_toEndOf="@id/image_actor_photo_second"
             app:layout_constraintStart_toStartOf="@id/image_actor_photo_second" />
@@ -302,7 +302,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/actor_mark_ruffalo_title"
-            android:textAppearance="@style/TextAppearance.AAG2020.TextView.ActorName"
+            android:textAppearance="@style/TextAppearance.AAG2020.Caption1.Alto"
             app:layout_constraintBaseline_toBaselineOf="@id/text_actor_name_first"
             app:layout_constraintEnd_toEndOf="@id/image_actor_photo_third"
             app:layout_constraintStart_toStartOf="@id/image_actor_photo_third" />
@@ -313,7 +313,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/actor_chris_hemsworth_title"
-            android:textAppearance="@style/TextAppearance.AAG2020.TextView.ActorName"
+            android:textAppearance="@style/TextAppearance.AAG2020.Caption1.Alto"
             app:layout_constraintBaseline_toBaselineOf="@id/text_actor_name_first"
             app:layout_constraintEnd_toEndOf="@id/image_actor_photo_fourth"
             app:layout_constraintStart_toStartOf="@id/image_actor_photo_fourth" />

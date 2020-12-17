@@ -40,13 +40,27 @@
         <item name="lineHeight">@dimen/line_height_14</item>
         <item name="android:background">@drawable/image_background_movie_rating</item>
     </style>
+
+    <style name="Widget.AAG2020.TextView.MoviesList.Header" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center_vertical</item>
+        <item name="lineHeight">@dimen/line_height_20</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra_4</item>
+        <item name="drawableStartCompat">@drawable/ic_location</item>
+        <item name="drawableTint">@color/radical_red</item>
+        <item name="android:drawablePadding">@dimen/margin_small</item>
+    </style>
+
+    <style name="Widget.AAG2020.TextView.CenterVertical.Normal" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center_vertical</item>
+        <item name="lineHeight">@dimen/line_height_12</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra_3</item>
+    </style>
     <!--</editor-fold>-->
 
     <!--<editor-fold desc="ImageView">-->
     <style name="Widget.AAG2020.ImageView.MovieLogo" parent="">
         <item name="android:scaleType">centerCrop</item>
         <item name="android:adjustViewBounds">true</item>
-        <item name="android:baselineAlignBottom">true</item>
     </style>
 
     <style name="Widget.AAG2020.ImageView.IconStar.RadicalRed" parent="">
@@ -57,8 +71,28 @@
         <item name="tint">@color/storm_gray</item>
     </style>
 
-    <style name="Widget.AAG2020.ImageView.Actor" parent="">
+    <style name="Widget.AAG2020.ImageView.CenterCrop" parent="">
         <item name="android:scaleType">centerCrop</item>
+    </style>
+    <!--</editor-fold>-->
+
+    <!--<editor-fold desc="CardView">-->
+    <style name="Widget.AAG2020.CardView.Movie" parent="Widget.MaterialComponents.CardView">
+        <item name="strokeColor">@color/mid_gray_alpha_50</item>
+        <item name="strokeWidth">@dimen/stroke_width_1</item>
+    </style>
+    <!--</editor-fold>-->
+
+    <!--Replace later-->
+    <!--<editor-fold desc="RatingBar">-->
+    <style name="Widget.AAG2020.RatingBar" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="android:progressDrawable">@drawable/ratingbar_movie</item>
+        <item name="android:progressTint">@color/radical_red</item>
+        <item name="android:minHeight">8dp</item>
+        <item name="android:maxHeight">8dp</item>
+        <item name="android:rating">4</item>
+        <item name="android:numStars">5</item>
+        <item name="android:stepSize">1</item>
     </style>
     <!--</editor-fold>-->
 </resources>

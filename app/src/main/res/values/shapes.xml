@@ -3,6 +3,18 @@
 
     <style name="ShapeAppearanceOverlay.AAG2020.ImageView.Actor" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/image_actor_shape_corner_size</item>
+        <item name="cornerSize">@dimen/corner_size_4</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.AAG2020.CardView.Movie" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/corner_size_8</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.AAG2020.ImageView.Movie" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/corner_size_6</item>
+        <item name="cornerSizeBottomLeft">@dimen/default_corner_size</item>
+        <item name="cornerSizeBottomRight">@dimen/default_corner_size</item>
     </style>
 </resources>
