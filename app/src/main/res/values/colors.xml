@@ -22,5 +22,7 @@
     <color name="radical_red">#FF3466</color>
     <color name="alto">#D8D8D8</color>
     <color name="gallery">#ECECEC</color>
+    <color name="scarpa_flow">#565665</color>
+    <color name="mid_gray_alpha_50">#80636375</color>
     <!--</editor-fold>-->
 </resources>
