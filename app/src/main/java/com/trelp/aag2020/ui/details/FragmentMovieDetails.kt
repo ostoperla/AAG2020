@@ -26,12 +26,16 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
     private var backButtonClickListener: OnBackButtonClick? = null
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         arguments?.let {
             movieId = it.getInt(ARG_MOVIE_ID, 0)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
         backButtonClickListener =
             if (context is OnBackButtonClick) context
