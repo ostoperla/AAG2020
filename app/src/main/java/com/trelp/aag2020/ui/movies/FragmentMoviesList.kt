@@ -53,6 +53,12 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
         super.onDetach()
     }
 
+    override fun onDestroyView() {
+        binding.listMovie.adapter = null
+
+        super.onDestroyView()
+    }
+
     private fun initMoviesList() {
         with(binding.listMovie) {
             setHasFixedSize(true)
