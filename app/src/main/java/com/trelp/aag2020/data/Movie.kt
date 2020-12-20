@@ -1,5 +1,9 @@
 package com.trelp.aag2020.data
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Movie(
     val id: Int,
     val title: String,
@@ -12,4 +16,6 @@ data class Movie(
     val runtime: Int,
     val genres: List<Genre>,
     val actors: List<Actor>
-)
+) : Parcelable
+
+fun Movie.isSame(other: Movie) = id == other.id
