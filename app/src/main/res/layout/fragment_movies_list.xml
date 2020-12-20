@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/fake_item_movie_margin_start"
-        android:layout_marginTop="@dimen/fake_item_movie_margin_top"
+        android:layout_marginTop="@dimen/margin_extra_large"
         android:layout_marginEnd="@dimen/fake_item_movie_margin_start"
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/item_movie_normal"

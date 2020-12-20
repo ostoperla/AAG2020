@@ -67,7 +67,7 @@
             android:layout_marginTop="@dimen/margin_small"
             tools:text="13+"
             android:textAppearance="@style/TextAppearance.AAG2020.Caption1.White"
-            app:layout_constraintStart_toStartOf="@id/guideline_root_left"
+            app:layout_constraintStart_toEndOf="@id/guideline_root_left"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -92,17 +92,18 @@
             android:textAppearance="@style/TextAppearance.AAG2020.TextView.MoviesTags"
             app:layout_constraintBottom_toTopOf="@id/rating"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_root_left" />
+            app:layout_constraintStart_toEndOf="@id/guideline_root_left" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_movie_reviews"
             style="@style/Widget.AAG2020.TextView.CenterVertical.Normal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_extra_small"
             android:layout_marginTop="@dimen/margin_extra_tiny"
             android:layout_marginBottom="@dimen/margin_small"
             tools:text="98 reviews"
+            app:layout_constraintEnd_toStartOf="@id/guideline_root_right"
             android:textAppearance="@style/TextAppearance.AAG2020.Overline1.StormGray"
             app:layout_constraintBottom_toBottomOf="@id/image_movie_logo"
             app:layout_constraintStart_toEndOf="@id/rating"
@@ -115,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/item_movie_rating_margin_bottom"
             app:layout_constraintBottom_toBottomOf="@id/image_movie_logo"
-            app:layout_constraintStart_toStartOf="@id/guideline_root_left" />
+            app:layout_constraintStart_toEndOf="@id/guideline_root_left" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_movie_name"
@@ -126,8 +127,8 @@
             tools:text="Black Widow"
             android:textAppearance="@style/TextAppearance.AAG2020.Headline1"
             app:layout_constraintBottom_toTopOf="@id/text_movie_duration"
-            app:layout_constraintEnd_toEndOf="@id/guideline_root_right"
-            app:layout_constraintStart_toStartOf="@id/guideline_root_left"
+            app:layout_constraintEnd_toStartOf="@id/guideline_root_right"
+            app:layout_constraintStart_toEndOf="@id/guideline_root_left"
             app:layout_constraintTop_toBottomOf="@id/image_movie_logo" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -138,8 +139,8 @@
             tools:text="97 min"
             android:textAppearance="@style/TextAppearance.AAG2020.Overline1.ScarpaFlow"
             app:layout_constraintBottom_toBottomOf="@id/guideline_root_bottom"
-            app:layout_constraintEnd_toEndOf="@id/guideline_root_right"
-            app:layout_constraintStart_toStartOf="@id/guideline_root_left"
+            app:layout_constraintEnd_toStartOf="@id/guideline_root_right"
+            app:layout_constraintStart_toEndOf="@id/guideline_root_left"
             app:layout_constraintTop_toBottomOf="@id/text_movie_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

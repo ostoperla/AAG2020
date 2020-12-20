@@ -24,12 +24,18 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
     private val movieDetails by lazy { MovieDetailsDataSource().getMovieDetails(movieId) }
     private val actorAdapter by lazy { ActorAdapter() }
 
+    private var backButtonClickListener: OnBackButtonClick? = null
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         arguments?.let {
             movieId = it.getInt(ARG_MOVIE_ID, 0)
         }
+
+        backButtonClickListener =
+            if (context is OnBackButtonClick) context
+            else throw ClassCastException("${context.javaClass} must implement OnBackButtonClick")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,6 +45,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
         with(binding) {
             imageMovieLogo.setImageResource(movieDetails.poster)
+            binding.textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
             textMovieRatingSystem.text = movieDetails.ageLimit
             textMovieName.text = movieDetails.title
             textMovieTags.text = movieDetails.tags
@@ -85,5 +92,15 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
     companion object {
         const val ARG_MOVIE_ID = "arg_movie_id"
+    }
+
+    override fun onDetach() {
+        backButtonClickListener = null
+
+        super.onDetach()
+    }
+
+    interface OnBackButtonClick {
+        fun onBackButtonClick()
     }
 }
