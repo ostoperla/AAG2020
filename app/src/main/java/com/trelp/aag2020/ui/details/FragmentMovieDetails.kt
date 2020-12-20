@@ -5,30 +5,31 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.Px
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.tmp.MovieDetailsDataSource
+import com.trelp.aag2020.data.Movie
 import com.trelp.aag2020.databinding.FragmentMovieDetailsBinding
 import com.trelp.aag2020.ui.common.BaseFragment
 import com.trelp.aag2020.ui.common.utils.dp2pxSize
+import com.trelp.aag2020.ui.common.utils.loadImage
 
 class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
     private val binding
         get() = viewBinding!! as FragmentMovieDetailsBinding
 
-    private var movieId: Int = 0
+    private var movie: Movie? = null
 
-    private val movieDetails by lazy { MovieDetailsDataSource().getMovieDetails(movieId) }
     private val actorAdapter by lazy { ActorAdapter() }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         arguments?.let {
-            movieId = it.getInt(ARG_MOVIE_ID, 0)
+            movie = it.getParcelable(ARG_MOVIE)
         }
     }
 
@@ -38,16 +39,18 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
         viewBinding = FragmentMovieDetailsBinding.bind(view)
 
         with(binding) {
-            imageMovieLogo.setImageResource(movieDetails.poster)
-            textMovieRatingSystem.text = movieDetails.ageLimit
-            textMovieName.text = movieDetails.title
-            textMovieTags.text = movieDetails.tags
-            textMovieReviews.text = resources.getQuantityString(
-                R.plurals.movie_reviews,
-                movieDetails.reviewCount,
-                movieDetails.reviewCount
-            )
-            textMovieStorylineContent.text = movieDetails.overview
+            movie?.let {
+                imageMovieLogo.loadImage(it.backdrop)
+                textMovieRatingSystem.text = it.minimumAge.toString()
+                textMovieName.text = it.title
+                textMovieTags.text = it.genres.joinToString { genre -> genre.name }
+                textMovieReviews.text = resources.getQuantityString(
+                    R.plurals.movie_reviews,
+                    it.numberOfRatings,
+                    it.numberOfRatings
+                )
+                textMovieStorylineContent.text = it.overview
+            }
         }
 
         initActorsList()
@@ -56,7 +59,16 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
     override fun onStart() {
         super.onStart()
 
-        actorAdapter.setupData(movieDetails.actors)
+        movie?.let {
+            if (it.actors.isNotEmpty()) {
+                actorAdapter.setupData(it.actors)
+            } else {
+                with(binding) {
+                    textMovieCast.isVisible = false
+                    listActor.isVisible = false
+                }
+            }
+        }
     }
 
     private fun initActorsList() {
@@ -84,6 +96,6 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
     }
 
     companion object {
-        const val ARG_MOVIE_ID = "arg_movie_id"
+        const val ARG_MOVIE = "arg_movie"
     }
 }

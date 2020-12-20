@@ -3,11 +3,12 @@ package com.trelp.aag2020.ui.movies
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.tmp.Movie
+import com.trelp.aag2020.data.Movie
 import com.trelp.aag2020.databinding.ItemMovieNormalBinding
 import com.trelp.aag2020.ui.common.adapter.AsyncListDifferAdapter
 import com.trelp.aag2020.ui.common.utils.context
 import com.trelp.aag2020.ui.common.utils.inflater
+import com.trelp.aag2020.ui.common.utils.loadImage
 import com.trelp.aag2020.ui.common.utils.tint
 import com.trelp.aag2020.ui.movies.MovieAdapter.MovieHolder
 
@@ -25,7 +26,7 @@ class MovieAdapter(
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         with(holder) {
             bind(getItem(position))
-            itemView.setOnClickListener { itemClickListener.onItemClick(getItem(position).id) }
+            itemView.setOnClickListener { itemClickListener.onItemClick(getItem(position)) }
         }
     }
 
@@ -35,28 +36,29 @@ class MovieAdapter(
 
         fun bind(movie: Movie) {
             with(binding) {
-                imageMovieLogo.setImageResource(movie.posterSmall)
-                textMovieRatingSystem.text = movie.ageLimit
-                textMovieTags.text = movie.tags
-                if (movie.isLike) {
+                imageMovieLogo.loadImage(movie.poster)
+                textMovieRatingSystem.text =
+                    context.getString(R.string.movie_age_limit, movie.minimumAge)
+                if (movie.id.rem(2) == 0) {
                     imageLike.drawable.tint(context, R.color.radical_red)
                 } else {
                     imageLike.drawable.tint(context, R.color.white)
                 }
+                textMovieTags.text = movie.genres.joinToString { it.name }
+                rating.rating = movie.ratings.div(2)
                 textMovieReviews.text = itemView.resources.getQuantityString(
                     R.plurals.movie_reviews,
-                    movie.reviewCount,
-                    movie.reviewCount
+                    movie.runtime,
+                    movie.runtime
                 )
-                rating.rating = movie.rating
                 textMovieName.text = movie.title
                 textMovieDuration.text =
-                    itemView.context.resources.getString(R.string.movie_duration, movie.duration)
+                    itemView.context.resources.getString(R.string.movie_duration, movie.runtime)
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(movieId: Int)
+        fun onItemClick(movie: Movie)
     }
 }

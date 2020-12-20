@@ -2,9 +2,10 @@ package com.trelp.aag2020.ui.details
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.trelp.aag2020.data.tmp.Actor
+import com.trelp.aag2020.data.Actor
 import com.trelp.aag2020.databinding.ItemActorBinding
 import com.trelp.aag2020.ui.common.utils.inflater
+import com.trelp.aag2020.ui.common.utils.loadImage
 
 class ActorAdapter : RecyclerView.Adapter<ActorAdapter.ActorHolder>() {
 
@@ -33,7 +34,7 @@ class ActorAdapter : RecyclerView.Adapter<ActorAdapter.ActorHolder>() {
 
         fun bind(actor: Actor) {
             with(binding) {
-                imageActorPhoto.setImageResource(actor.photo)
+                imageActorPhoto.loadImage(actor.picture)
                 textActorName.text = actor.name
             }
         }
