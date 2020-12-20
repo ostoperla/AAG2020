@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.MovieDetailsDataSource
+import com.trelp.aag2020.data.MoviesDataSource
 import com.trelp.aag2020.databinding.FragmentMovieDetailsBinding
 import com.trelp.aag2020.ui.common.BaseFragment
 import com.trelp.aag2020.ui.common.utils.dp2pxSize
@@ -21,7 +21,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
     private var movieId: Int = 0
 
-    private val movieDetails by lazy { MovieDetailsDataSource().getMovieDetails(movieId) }
+    private val movieDetails by lazy { MoviesDataSource().getMovie(movieId) }
     private val actorAdapter by lazy { ActorAdapter() }
 
     private var backButtonClickListener: OnBackButtonClick? = null
