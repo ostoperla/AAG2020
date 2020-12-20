@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * Use only for VERTICAL orientation
+ */
 class MovieOffsetItemDecoration(
-    private val offset: Int,
-    private val orientation: Int = RecyclerView.VERTICAL
+    private val offset: Int
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
@@ -21,24 +23,17 @@ class MovieOffsetItemDecoration(
         val rect = Rect(0, 0, 0, 0)
         val childPosition = parent.getChildAdapterPosition(view)
 
-        when (orientation) {
-            RecyclerView.VERTICAL -> {
-                val childIsInLeftmostColumn = childPosition.rem(SPAN_COUNT) == 0
-                val childIsInFirstRow = childPosition < SPAN_COUNT
+        val childIsInLeftmostColumn = childPosition.rem(SPAN_COUNT) == 0
+        val childIsInFirstRow = childPosition < SPAN_COUNT
 
-                if (childIsInLeftmostColumn) {
-                    rect.right = offset.div(SPAN_COUNT)
-                } else {
-                    rect.left = offset.div(SPAN_COUNT)
-                }
+        if (childIsInLeftmostColumn) {
+            rect.right = offset.div(SPAN_COUNT)
+        } else {
+            rect.left = offset.div(SPAN_COUNT)
+        }
 
-                if (!childIsInFirstRow) {
-                    rect.top = offset
-                }
-            }
-            RecyclerView.HORIZONTAL -> {
-                // TODO: 23.11.2020 Implement this
-            }
+        if (!childIsInFirstRow) {
+            rect.top = offset
         }
 
         Log.d(this.javaClass.simpleName, "$childPosition/$rect")
