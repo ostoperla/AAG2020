@@ -24,6 +24,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
     private var movie: Movie? = null
 
     private val actorAdapter by lazy { ActorAdapter() }
+    private var backButtonClickListener: OnBackButtonClick? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,6 +32,10 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
         arguments?.let {
             movie = it.getParcelable(ARG_MOVIE)
         }
+
+        backButtonClickListener =
+            if (context is OnBackButtonClick) context
+            else throw ClassCastException("${context.javaClass} must implement OnBackButtonClick")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -97,5 +102,15 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
     companion object {
         const val ARG_MOVIE = "arg_movie"
+    }
+
+    override fun onDetach() {
+        backButtonClickListener = null
+
+        super.onDetach()
+    }
+
+    interface OnBackButtonClick {
+        fun onBackButtonClick()
     }
 }

@@ -14,7 +14,7 @@ import com.trelp.aag2020.ui.movies.MovieAdapter.MovieHolder
 
 class MovieAdapter(
     itemDiff: (old: Movie, new: Movie) -> Boolean,
-    private val itemClickListener: OnItemClickListener
+    private val itemClickListener: FragmentMoviesList.OnItemClickListener?
 ) : AsyncListDifferAdapter<Movie, MovieHolder>(itemDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
@@ -26,7 +26,7 @@ class MovieAdapter(
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         with(holder) {
             bind(getItem(position))
-            itemView.setOnClickListener { itemClickListener.onItemClick(getItem(position)) }
+            itemView.setOnClickListener { itemClickListener?.onItemClick(getItem(position)) }
         }
     }
 
@@ -56,9 +56,5 @@ class MovieAdapter(
                     itemView.context.resources.getString(R.string.movie_duration, movie.runtime)
             }
         }
-    }
-
-    interface OnItemClickListener {
-        fun onItemClick(movie: Movie)
     }
 }
