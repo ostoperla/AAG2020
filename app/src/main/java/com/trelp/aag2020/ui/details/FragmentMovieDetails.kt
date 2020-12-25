@@ -46,6 +46,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
         with(binding) {
             movie?.let {
                 imageMovieLogo.loadImage(it.backdrop)
+                textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
                 textMovieRatingSystem.text = it.minimumAge.toString()
                 textMovieName.text = it.title
                 textMovieTags.text = it.genres.joinToString { genre -> genre.name }
