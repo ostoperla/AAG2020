@@ -49,7 +49,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
         with(binding) {
             imageMovieLogo.setImageResource(movieDetails.poster)
-            binding.textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
+            textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
             textMovieRatingSystem.text = movieDetails.ageLimit
             textMovieName.text = movieDetails.title
             textMovieTags.text = movieDetails.tags
