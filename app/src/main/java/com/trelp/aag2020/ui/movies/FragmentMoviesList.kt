@@ -3,22 +3,24 @@ package com.trelp.aag2020.ui.movies
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trelp.aag2020.R
+import com.trelp.aag2020.TMDBApplication
 import com.trelp.aag2020.data.Movie
 import com.trelp.aag2020.data.isSame
-import com.trelp.aag2020.data.loadMovies
 import com.trelp.aag2020.databinding.FragmentMoviesListBinding
 import com.trelp.aag2020.ui.common.BaseFragment
 import com.trelp.aag2020.ui.common.utils.dp2pxOffset
-import kotlinx.coroutines.*
 
 class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
 
-    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
-
     private val binding
         get() = viewBinding!! as FragmentMoviesListBinding
+
+    private val viewModel: MoviesListViewModel by viewModels {
+        MoviesListViewModel.factory(TMDBApplication.INSTANCE)
+    }
 
     interface OnItemClickListener {
         fun onItemClick(movie: Movie)
@@ -47,23 +49,12 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
         viewBinding = FragmentMoviesListBinding.bind(view)
 
         initMoviesList()
+
+        viewModel.movies.observe(viewLifecycleOwner) { updateMoviesList(it) }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        scope.launch {
-            context?.applicationContext?.let { context ->
-                val movies = loadMovies(context)
-                binding.listMovie.adapter =
-                    movieAdapter.also { it.submitList(movies) }
-            }
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        scope.cancel()
+    private fun updateMoviesList(data: List<Movie>) {
+        binding.listMovie.adapter = movieAdapter.also { it.submitList(data) }
     }
 
     private fun initMoviesList() {

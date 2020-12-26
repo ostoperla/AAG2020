@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.Px
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
+import com.trelp.aag2020.data.Actor
 import com.trelp.aag2020.data.Movie
 import com.trelp.aag2020.databinding.FragmentMovieDetailsBinding
 import com.trelp.aag2020.ui.common.BaseFragment
@@ -20,6 +22,10 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
     private val binding
         get() = viewBinding!! as FragmentMovieDetailsBinding
+
+    private val viewModel: MovieDetailsViewModel by viewModels {
+        MovieDetailsViewModel.factory(movie!!)
+    }
 
     private var movie: Movie? = null
 
@@ -60,19 +66,17 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
         }
 
         initActorsList()
+
+        viewModel.actors.observe(viewLifecycleOwner) { setupActors(it) }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        movie?.let {
-            if (it.actors.isNotEmpty()) {
-                actorAdapter.setupData(it.actors)
-            } else {
-                with(binding) {
-                    textMovieCast.isVisible = false
-                    listActor.isVisible = false
-                }
+    private fun setupActors(data: List<Actor>) {
+        if (data.isNotEmpty()) {
+            actorAdapter.setupData(data)
+        } else {
+            with(binding) {
+                textMovieCast.isVisible = false
+                listActor.isVisible = false
             }
         }
     }
