@@ -6,12 +6,14 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trelp.aag2020.R
-import com.trelp.aag2020.TMDBApplication
 import com.trelp.aag2020.data.Movie
+import com.trelp.aag2020.data.MoviesRepository
 import com.trelp.aag2020.data.isSame
+import com.trelp.aag2020.data.storage.LocalDataSource
 import com.trelp.aag2020.databinding.FragmentMoviesListBinding
 import com.trelp.aag2020.ui.common.BaseFragment
 import com.trelp.aag2020.ui.common.utils.dp2pxOffset
+import kotlinx.serialization.json.Json
 
 class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
 
@@ -19,7 +21,14 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
         get() = viewBinding!! as FragmentMoviesListBinding
 
     private val viewModel: MoviesListViewModel by viewModels {
-        MoviesListViewModel.factory(TMDBApplication.INSTANCE)
+        MoviesListViewModel.factory(
+            MoviesRepository(
+                LocalDataSource(
+                    requireContext().applicationContext.assets,
+                    Json { ignoreUnknownKeys = true }
+                )
+            )
+        )
     }
 
     interface OnItemClickListener {
