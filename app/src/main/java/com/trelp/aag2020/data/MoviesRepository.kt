@@ -1,6 +1,9 @@
 package com.trelp.aag2020.data
 
 import com.trelp.aag2020.data.storage.LocalDataSource
+import com.trelp.aag2020.domain.entity.Actor
+import com.trelp.aag2020.domain.entity.Genre
+import com.trelp.aag2020.domain.entity.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber

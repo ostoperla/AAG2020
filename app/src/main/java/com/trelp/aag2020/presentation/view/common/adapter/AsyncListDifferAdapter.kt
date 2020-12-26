@@ -1,4 +1,4 @@
-package com.trelp.aag2020.ui.common.adapter
+package com.trelp.aag2020.presentation.view.common.adapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil

@@ -1,4 +1,4 @@
-package com.trelp.aag2020.data
+package com.trelp.aag2020.domain.entity
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

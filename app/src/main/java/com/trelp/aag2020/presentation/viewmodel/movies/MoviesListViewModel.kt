@@ -1,7 +1,7 @@
-package com.trelp.aag2020.ui.movies
+package com.trelp.aag2020.presentation.viewmodel.movies
 
 import androidx.lifecycle.*
-import com.trelp.aag2020.data.Movie
+import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.data.MoviesRepository
 import kotlinx.coroutines.launch
 

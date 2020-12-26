@@ -1,4 +1,4 @@
-package com.trelp.aag2020.ui.common
+package com.trelp.aag2020.presentation.view.common
 
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment

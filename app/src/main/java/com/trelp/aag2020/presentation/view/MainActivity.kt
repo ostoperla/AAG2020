@@ -1,4 +1,4 @@
-package com.trelp.aag2020.ui
+package com.trelp.aag2020.presentation.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,9 +7,9 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.Movie
-import com.trelp.aag2020.ui.details.FragmentMovieDetails
-import com.trelp.aag2020.ui.movies.FragmentMoviesList
+import com.trelp.aag2020.domain.entity.Movie
+import com.trelp.aag2020.presentation.view.details.FragmentMovieDetails
+import com.trelp.aag2020.presentation.view.movies.FragmentMoviesList
 
 class MainActivity : AppCompatActivity(R.layout.activity_main),
     FragmentMoviesList.OnItemClickListener,

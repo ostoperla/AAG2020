@@ -1,4 +1,4 @@
-package com.trelp.aag2020.ui.movies
+package com.trelp.aag2020.presentation.view.movies
 
 import android.content.Context
 import android.os.Bundle
@@ -6,13 +6,14 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.Movie
+import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.data.MoviesRepository
-import com.trelp.aag2020.data.isSame
+import com.trelp.aag2020.domain.entity.isSame
 import com.trelp.aag2020.data.storage.LocalDataSource
 import com.trelp.aag2020.databinding.FragmentMoviesListBinding
-import com.trelp.aag2020.ui.common.BaseFragment
-import com.trelp.aag2020.ui.common.utils.dp2pxOffset
+import com.trelp.aag2020.presentation.view.common.BaseFragment
+import com.trelp.aag2020.presentation.view.common.utils.dp2pxOffset
+import com.trelp.aag2020.presentation.viewmodel.movies.MoviesListViewModel
 import kotlinx.serialization.json.Json
 
 class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {

@@ -1,11 +1,11 @@
-package com.trelp.aag2020.ui.details
+package com.trelp.aag2020.presentation.view.details
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.trelp.aag2020.data.Actor
+import com.trelp.aag2020.domain.entity.Actor
 import com.trelp.aag2020.databinding.ItemActorBinding
-import com.trelp.aag2020.ui.common.utils.inflater
-import com.trelp.aag2020.ui.common.utils.loadImage
+import com.trelp.aag2020.presentation.view.common.utils.inflater
+import com.trelp.aag2020.presentation.view.common.utils.loadImage
 
 class ActorAdapter : RecyclerView.Adapter<ActorAdapter.ActorHolder>() {
 

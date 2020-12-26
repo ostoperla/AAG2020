@@ -1,4 +1,4 @@
-package com.trelp.aag2020.ui.movies
+package com.trelp.aag2020.presentation.view.movies
 
 import android.graphics.Rect
 import android.util.Log

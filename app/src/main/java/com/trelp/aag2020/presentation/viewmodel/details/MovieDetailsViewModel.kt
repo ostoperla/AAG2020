@@ -1,11 +1,11 @@
-package com.trelp.aag2020.ui.details
+package com.trelp.aag2020.presentation.viewmodel.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.trelp.aag2020.data.Actor
-import com.trelp.aag2020.data.Movie
+import com.trelp.aag2020.domain.entity.Actor
+import com.trelp.aag2020.domain.entity.Movie
 
 class MovieDetailsViewModel(
     private val movie: Movie

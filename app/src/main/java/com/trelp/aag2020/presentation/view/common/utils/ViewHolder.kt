@@ -1,4 +1,4 @@
-package com.trelp.aag2020.ui.common.utils
+package com.trelp.aag2020.presentation.view.common.utils
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView

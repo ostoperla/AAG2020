@@ -1,16 +1,16 @@
-package com.trelp.aag2020.ui.movies
+package com.trelp.aag2020.presentation.view.movies
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.Movie
+import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.databinding.ItemMovieNormalBinding
-import com.trelp.aag2020.ui.common.adapter.AsyncListDifferAdapter
-import com.trelp.aag2020.ui.common.utils.context
-import com.trelp.aag2020.ui.common.utils.inflater
-import com.trelp.aag2020.ui.common.utils.loadImage
-import com.trelp.aag2020.ui.common.utils.tint
-import com.trelp.aag2020.ui.movies.MovieAdapter.MovieHolder
+import com.trelp.aag2020.presentation.view.common.adapter.AsyncListDifferAdapter
+import com.trelp.aag2020.presentation.view.common.utils.context
+import com.trelp.aag2020.presentation.view.common.utils.inflater
+import com.trelp.aag2020.presentation.view.common.utils.loadImage
+import com.trelp.aag2020.presentation.view.common.utils.tint
+import com.trelp.aag2020.presentation.view.movies.MovieAdapter.MovieHolder
 
 class MovieAdapter(
     itemDiff: (old: Movie, new: Movie) -> Boolean,

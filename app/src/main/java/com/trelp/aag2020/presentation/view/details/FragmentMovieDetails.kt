@@ -1,4 +1,4 @@
-package com.trelp.aag2020.ui.details
+package com.trelp.aag2020.presentation.view.details
 
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.Actor
-import com.trelp.aag2020.data.Movie
+import com.trelp.aag2020.domain.entity.Actor
+import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.databinding.FragmentMovieDetailsBinding
-import com.trelp.aag2020.ui.common.BaseFragment
-import com.trelp.aag2020.ui.common.utils.dp2pxSize
-import com.trelp.aag2020.ui.common.utils.loadImage
+import com.trelp.aag2020.presentation.view.common.BaseFragment
+import com.trelp.aag2020.presentation.view.common.utils.dp2pxSize
+import com.trelp.aag2020.presentation.view.common.utils.loadImage
+import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel
 
 class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
