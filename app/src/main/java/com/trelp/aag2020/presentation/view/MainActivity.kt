@@ -7,15 +7,21 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.trelp.aag2020.R
-import com.trelp.aag2020.domain.entity.Movie
+import com.trelp.aag2020.di.ComponentOwner
+import com.trelp.aag2020.di.Injector
+import com.trelp.aag2020.di.activity.ActivityComponent
+import com.trelp.aag2020.di.application.AppComponent
 import com.trelp.aag2020.presentation.view.details.FragmentMovieDetails
 import com.trelp.aag2020.presentation.view.movies.FragmentMoviesList
 
 class MainActivity : AppCompatActivity(R.layout.activity_main),
     FragmentMoviesList.OnItemClickListener,
-    FragmentMovieDetails.OnBackButtonClick {
+    FragmentMovieDetails.OnBackButtonClick,
+    ComponentOwner<ActivityComponent> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Injector.getOrCreateComponent(this)
+
         super.onCreate(savedInstanceState)
 
         navigateToMoviesList(savedInstanceState == null)
@@ -30,8 +36,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         }
     }
 
-    private fun navigateToMovieDetails(movie: Movie) {
-        val bundle = bundleOf(FragmentMovieDetails.ARG_MOVIE to movie)
+    private fun navigateToMovieDetails(movieId: Int) {
+        val bundle = bundleOf(FragmentMovieDetails.ARG_MOVIE_ID to movieId)
         supportFragmentManager.commit {
             addToBackStack(null)
             setReorderingAllowed(true)
@@ -43,11 +49,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         supportFragmentManager.popBackStack()
     }
 
-    override fun onItemClick(movie: Movie) {
-        navigateToMovieDetails(movie)
+    override fun onItemClick(movieId: Int) {
+        navigateToMovieDetails(movieId)
     }
 
     override fun onBackButtonClick() {
         backToPreviousFragment()
     }
+
+    override fun createComponent() =
+        Injector.findComponent<AppComponent>().activityComponentFactory().create()
 }

@@ -26,7 +26,7 @@ class MovieAdapter(
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         with(holder) {
             bind(getItem(position))
-            itemView.setOnClickListener { itemClickListener?.onItemClick(getItem(position)) }
+            itemView.setOnClickListener { itemClickListener?.onItemClick(getItem(position).id) }
         }
     }
 

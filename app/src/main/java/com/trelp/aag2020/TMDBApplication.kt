@@ -1,16 +1,19 @@
 package com.trelp.aag2020
 
 import android.app.Application
+import com.trelp.aag2020.di.ComponentOwner
+import com.trelp.aag2020.di.Injector
+import com.trelp.aag2020.di.application.AppComponent
+import com.trelp.aag2020.di.application.DaggerAppComponent
 import timber.log.Timber
 
-class TMDBApplication : Application() {
+class TMDBApplication : Application(), ComponentOwner<AppComponent> {
 
     override fun onCreate() {
         super.onCreate()
 
-        INSTANCE = this
-
         initLogger()
+        initDagger()
     }
 
     private fun initLogger() {
@@ -19,8 +22,9 @@ class TMDBApplication : Application() {
         }
     }
 
-    companion object {
-        internal lateinit var INSTANCE: Application
-            private set
+    private fun initDagger() {
+        Injector.init(this)
     }
+
+    override fun createComponent() = DaggerAppComponent.factory().create(this)
 }

@@ -4,32 +4,40 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.trelp.aag2020.domain.entity.Actor
+import androidx.lifecycle.viewModelScope
+import com.trelp.aag2020.data.MoviesRepository
 import com.trelp.aag2020.domain.entity.Movie
+import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel(
-    private val movie: Movie
+class MovieDetailsViewModel constructor(
+    private val moviesRepository: MoviesRepository,
+    private val movieId: Int,
 ) : ViewModel() {
 
-    private val _actors = MutableLiveData<List<Actor>>()
-    val actors: LiveData<List<Actor>>
-        get() = _actors
+    private val _movie = MutableLiveData<Movie>()
+    val movie: LiveData<Movie>
+        get() = _movie
 
     init {
-        loadActors()
+        loadMovieDetails()
     }
 
-    private fun loadActors() {
-        _actors.value = movie.actors
+    private fun loadMovieDetails() {
+        viewModelScope.launch {
+            _movie.value = moviesRepository.loadMovie(movieId)
+        }
     }
 
     companion object {
-        fun factory(movie: Movie) = object : ViewModelProvider.Factory {
+        fun factory(
+            moviesRepository: MoviesRepository,
+            movieId: Int
+        ) = object : ViewModelProvider.Factory {
 
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel?> create(modelClass: Class<T>) =
                 if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
-                    MovieDetailsViewModel(movie) as T
+                    MovieDetailsViewModel(moviesRepository, movieId) as T
                 } else {
                     throw IllegalArgumentException("Unknown ViewModel class: $modelClass")
                 }

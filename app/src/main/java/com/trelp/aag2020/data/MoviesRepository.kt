@@ -7,12 +7,13 @@ import com.trelp.aag2020.domain.entity.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
 import kotlin.system.measureTimeMillis
 import com.trelp.aag2020.data.model.Actor as ResponseActor
 import com.trelp.aag2020.data.model.Genre as ResponseGenre
 import com.trelp.aag2020.data.model.Movie as ResponseMovie
 
-class MoviesRepository(
+class MoviesRepository @Inject constructor(
     private val localDataSource: LocalDataSource
 ) {
 
@@ -66,4 +67,7 @@ class MoviesRepository(
 
         movies
     }
+
+    suspend fun loadMovie(movieId: Int) =
+        loadMovies().find { it.id == movieId }
 }

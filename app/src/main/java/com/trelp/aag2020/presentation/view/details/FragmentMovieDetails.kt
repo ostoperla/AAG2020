@@ -11,24 +11,32 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
+import com.trelp.aag2020.data.MoviesRepository
 import com.trelp.aag2020.domain.entity.Actor
-import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.databinding.FragmentMovieDetailsBinding
+import com.trelp.aag2020.di.ComponentOwner
+import com.trelp.aag2020.di.Injector
+import com.trelp.aag2020.di.activity.ActivityComponent
+import com.trelp.aag2020.di.details.DetailsComponent
+import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxSize
 import com.trelp.aag2020.presentation.view.common.utils.loadImage
 import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel
+import javax.inject.Inject
 
-class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
+class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
+    ComponentOwner<DetailsComponent> {
 
     private val binding
         get() = viewBinding!! as FragmentMovieDetailsBinding
 
-    private val viewModel: MovieDetailsViewModel by viewModels {
-        MovieDetailsViewModel.factory(movie!!)
-    }
+    @Inject
+    lateinit var moviesRepository: MoviesRepository
 
-    private var movie: Movie? = null
+    private val viewModel: MovieDetailsViewModel by viewModels {
+        MovieDetailsViewModel.factory(moviesRepository, arguments?.getInt(ARG_MOVIE_ID) ?: 0)
+    }
 
     private val actorAdapter by lazy { ActorAdapter() }
     private var backButtonClickListener: OnBackButtonClick? = null
@@ -36,9 +44,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        arguments?.let {
-            movie = it.getParcelable(ARG_MOVIE)
-        }
+        Injector.getOrCreateComponent(this).inject(this)
 
         backButtonClickListener =
             if (context is OnBackButtonClick) context
@@ -50,6 +56,12 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
 
         viewBinding = FragmentMovieDetailsBinding.bind(view)
 
+        initActorsList()
+
+        viewModel.movie.observe(viewLifecycleOwner) { setupDetails(it) }
+    }
+
+    private fun setupDetails(movie: Movie?) {
         with(binding) {
             movie?.let {
                 imageMovieLogo.loadImage(it.backdrop)
@@ -63,12 +75,9 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
                     it.numberOfRatings
                 )
                 textMovieStorylineContent.text = it.overview
+                setupActors(it.actors)
             }
         }
-
-        initActorsList()
-
-        viewModel.actors.observe(viewLifecycleOwner) { setupActors(it) }
     }
 
     private fun setupActors(data: List<Actor>) {
@@ -106,17 +115,20 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
         )
     }
 
-    companion object {
-        const val ARG_MOVIE = "arg_movie"
-    }
-
     override fun onDetach() {
         backButtonClickListener = null
 
         super.onDetach()
     }
 
+    override fun createComponent() =
+        Injector.findComponent<ActivityComponent>().detailsComponentFactory().create()
+
     interface OnBackButtonClick {
         fun onBackButtonClick()
+    }
+
+    companion object {
+        const val ARG_MOVIE_ID = "arg_movie_id"
     }
 }

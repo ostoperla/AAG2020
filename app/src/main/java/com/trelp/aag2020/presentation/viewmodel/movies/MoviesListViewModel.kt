@@ -4,8 +4,9 @@ import androidx.lifecycle.*
 import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.data.MoviesRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MoviesListViewModel(
+class MoviesListViewModel @Inject constructor(
     private val moviesRepository: MoviesRepository
 ) : ViewModel() {
 
@@ -20,19 +21,6 @@ class MoviesListViewModel(
     private fun loadMoviesList() {
         viewModelScope.launch {
             _movies.value = moviesRepository.loadMovies()
-        }
-    }
-
-    companion object {
-        fun factory(moviesRepository: MoviesRepository) = object : ViewModelProvider.Factory {
-
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel?> create(modelClass: Class<T>) =
-                if (modelClass.isAssignableFrom(MoviesListViewModel::class.java)) {
-                    MoviesListViewModel(moviesRepository) as T
-                } else {
-                    throw IllegalArgumentException("Unknown ViewModel class: $modelClass")
-                }
         }
     }
 }
