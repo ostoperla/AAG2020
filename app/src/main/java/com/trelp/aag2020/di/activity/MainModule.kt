@@ -15,12 +15,6 @@ object MainModule {
 
     @Provides
     @ActivityScope
-    fun provideJson(): Json {
-        return Json { ignoreUnknownKeys = true }
-    }
-
-    @Provides
-    @ActivityScope
     fun provideAssetManager(@AppContext context: Context): AssetManager {
         return context.assets
     }

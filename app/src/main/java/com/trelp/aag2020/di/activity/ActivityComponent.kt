@@ -4,14 +4,13 @@ import com.trelp.aag2020.di.ActivityScope
 import com.trelp.aag2020.di.ImComponent
 import com.trelp.aag2020.di.details.DetailsComponent
 import com.trelp.aag2020.di.movies.MoviesComponent
-
 import dagger.Subcomponent
-
 
 @Subcomponent(
     modules = [
         MainModule::class,
-        VMModule::class
+        VMModule::class,
+        NetworkModule::class
     ]
 )
 @ActivityScope
