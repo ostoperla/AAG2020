@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.trelp.aag2020.BuildConfig
 import com.trelp.aag2020.data.network.interceptor.AuthInterceptor
 import com.trelp.aag2020.data.network.TmdbAPI
+import com.trelp.aag2020.data.network.interceptor.ErrorResponseInterceptor
 import com.trelp.aag2020.di.ActivityScope
 import dagger.Module
 import dagger.Provides
@@ -42,12 +43,20 @@ object NetworkModule {
 
     @Provides
     @ActivityScope
+    fun provideErrorResponseInterceptor(): ErrorResponseInterceptor {
+        return ErrorResponseInterceptor()
+    }
+
+    @Provides
+    @ActivityScope
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
         authInterceptor: AuthInterceptor,
+        errorResponseInterceptor: ErrorResponseInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder().apply {
             addInterceptor(authInterceptor)
+            addNetworkInterceptor(errorResponseInterceptor)
             if (BuildConfig.DEBUG) {
                 addInterceptor(loggingInterceptor)
                 addNetworkInterceptor(loggingInterceptor)
