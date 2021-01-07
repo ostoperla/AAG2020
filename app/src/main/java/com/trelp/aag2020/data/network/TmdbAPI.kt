@@ -2,6 +2,7 @@ package com.trelp.aag2020.data.network
 
 import com.trelp.aag2020.data.model.CastResponse
 import com.trelp.aag2020.data.model.ConfigurationResponse
+import com.trelp.aag2020.data.model.GenresResponse
 import com.trelp.aag2020.data.model.MovieDetailsResponse
 import com.trelp.aag2020.data.model.MoviesResponse
 import retrofit2.http.GET
@@ -33,4 +34,7 @@ interface TmdbAPI {
     suspend fun getMovieCredits(
         @Path("movie_id") movieId: Int
     ): CastResponse
+
+    @GET("genre/movie/list")
+    suspend fun getGenresForMovies(): GenresResponse
 }

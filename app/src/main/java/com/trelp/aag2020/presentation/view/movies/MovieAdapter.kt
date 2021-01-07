@@ -36,7 +36,7 @@ class MovieAdapter(
 
         fun bind(movie: Movie) {
             with(binding) {
-                imageMovieLogo.loadImage(movie.poster)
+                imageMovieLogo.loadImage(movie.posterPath)
                 textMovieRatingSystem.text =
                     context.getString(R.string.movie_age_limit, movie.minimumAge)
                 if (movie.id.rem(2) == 0) {
@@ -45,11 +45,11 @@ class MovieAdapter(
                     imageLike.drawable.tint(context, R.color.white)
                 }
                 textMovieTags.text = movie.genres.joinToString { it.name }
-                rating.rating = movie.ratings.div(2)
+                rating.rating = movie.voteAverage.div(2)
                 textMovieReviews.text = itemView.resources.getQuantityString(
                     R.plurals.movie_reviews,
-                    movie.runtime,
-                    movie.runtime
+                    movie.voteCount,
+                    movie.voteCount
                 )
                 textMovieName.text = movie.title
                 textMovieDuration.text =

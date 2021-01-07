@@ -5,18 +5,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.trelp.aag2020.data.MoviesRepository
-import com.trelp.aag2020.domain.entity.Movie
+import com.trelp.aag2020.domain.MovieRepository
+import com.trelp.aag2020.domain.entity.Actor
+import com.trelp.aag2020.domain.entity.MovieDetails
 import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel constructor(
-    private val moviesRepository: MoviesRepository,
+    private val movieRepository: MovieRepository,
     private val movieId: Int,
 ) : ViewModel() {
 
-    private val _movie = MutableLiveData<Movie>()
-    val movie: LiveData<Movie>
+    private val _movie = MutableLiveData<MovieDetails>()
+    val movie: LiveData<MovieDetails>
         get() = _movie
+
+    private val _actors = MutableLiveData<List<Actor>>()
+    val actors: LiveData<List<Actor>>
+        get() = _actors
 
     init {
         loadMovieDetails()
@@ -24,20 +29,21 @@ class MovieDetailsViewModel constructor(
 
     private fun loadMovieDetails() {
         viewModelScope.launch {
-            _movie.value = moviesRepository.loadMovie(movieId)
+            _movie.value = movieRepository.getMovieDetails(movieId)
+            _actors.value = movieRepository.getActorsList(movieId)
         }
     }
 
     companion object {
         fun factory(
-            moviesRepository: MoviesRepository,
+            movieRepository: MovieRepository,
             movieId: Int
         ) = object : ViewModelProvider.Factory {
 
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel?> create(modelClass: Class<T>) =
                 if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
-                    MovieDetailsViewModel(moviesRepository, movieId) as T
+                    MovieDetailsViewModel(movieRepository, movieId) as T
                 } else {
                     throw IllegalArgumentException("Unknown ViewModel class: $modelClass")
                 }

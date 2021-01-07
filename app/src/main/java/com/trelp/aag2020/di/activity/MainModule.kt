@@ -1,36 +1,29 @@
 package com.trelp.aag2020.di.activity
 
-import android.content.Context
-import android.content.res.AssetManager
-import com.trelp.aag2020.data.MoviesRepository
-import com.trelp.aag2020.data.storage.LocalDataSource
+import com.trelp.aag2020.data.AppDispatchers
+import com.trelp.aag2020.data.DispatchersProvider
+import com.trelp.aag2020.data.MovieRepositoryImpl
+import com.trelp.aag2020.data.network.TmdbAPI
 import com.trelp.aag2020.di.ActivityScope
-import com.trelp.aag2020.di.AppContext
+import com.trelp.aag2020.domain.MovieRepository
 import dagger.Module
 import dagger.Provides
-import kotlinx.serialization.json.Json
 
 @Module
 object MainModule {
 
     @Provides
     @ActivityScope
-    fun provideAssetManager(@AppContext context: Context): AssetManager {
-        return context.assets
+    fun provideDispatchers(): DispatchersProvider {
+        return AppDispatchers()
     }
 
     @Provides
     @ActivityScope
-    fun provideLocalDataSource(
-        assetManager: AssetManager,
-        json: Json
-    ): LocalDataSource {
-        return LocalDataSource(assetManager, json)
-    }
-
-    @Provides
-    @ActivityScope
-    fun provideMoviesRepository(localDataSource: LocalDataSource): MoviesRepository {
-        return MoviesRepository(localDataSource)
+    fun provideMoviesRepository(
+        tmdbApi: TmdbAPI,
+        dispatchers: DispatchersProvider
+    ): MovieRepository {
+        return MovieRepositoryImpl(tmdbApi, dispatchers)
     }
 }

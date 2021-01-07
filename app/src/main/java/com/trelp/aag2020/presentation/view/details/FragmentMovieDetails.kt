@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.MoviesRepository
 import com.trelp.aag2020.domain.entity.Actor
 import com.trelp.aag2020.databinding.FragmentMovieDetailsBinding
 import com.trelp.aag2020.di.ComponentOwner
 import com.trelp.aag2020.di.Injector
 import com.trelp.aag2020.di.activity.ActivityComponent
 import com.trelp.aag2020.di.details.DetailsComponent
-import com.trelp.aag2020.domain.entity.Movie
+import com.trelp.aag2020.domain.MovieRepository
+import com.trelp.aag2020.domain.entity.MovieDetails
 import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxSize
 import com.trelp.aag2020.presentation.view.common.utils.loadImage
@@ -32,7 +32,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
         get() = viewBinding!! as FragmentMovieDetailsBinding
 
     @Inject
-    lateinit var moviesRepository: MoviesRepository
+    lateinit var moviesRepository: MovieRepository
 
     private val viewModel: MovieDetailsViewModel by viewModels {
         MovieDetailsViewModel.factory(moviesRepository, arguments?.getInt(ARG_MOVIE_ID) ?: 0)
@@ -59,23 +59,24 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
         initActorsList()
 
         viewModel.movie.observe(viewLifecycleOwner) { setupDetails(it) }
+        viewModel.actors.observe(viewLifecycleOwner) { setupActors(it) }
     }
 
-    private fun setupDetails(movie: Movie?) {
+    private fun setupDetails(movie: MovieDetails?) {
         with(binding) {
             movie?.let {
-                imageMovieLogo.loadImage(it.backdrop)
+                imageMovieLogo.loadImage(it.backdropPath)
                 textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
                 textMovieRatingSystem.text = it.minimumAge.toString()
                 textMovieName.text = it.title
                 textMovieTags.text = it.genres.joinToString { genre -> genre.name }
                 textMovieReviews.text = resources.getQuantityString(
                     R.plurals.movie_reviews,
-                    it.numberOfRatings,
-                    it.numberOfRatings
+                    it.voteCount,
+                    it.voteCount
                 )
                 textMovieStorylineContent.text = it.overview
-                setupActors(it.actors)
+//                setupActors(it.actors)
             }
         }
     }

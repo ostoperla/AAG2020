@@ -2,16 +2,24 @@ package com.trelp.aag2020.domain.entity
 
 data class Movie(
     val id: Int,
-    val title: String,
-    val overview: String,
-    val poster: String,
-    val backdrop: String,
-    val ratings: Float,
-    val numberOfRatings: Int,
     val minimumAge: Int,
-    val runtime: Int,
+    val posterPath: String,
     val genres: List<Genre>,
-    val actors: List<Actor>
+    val voteAverage: Float,
+    val voteCount: Int,
+    val title: String,
+    val runtime: Int
 )
 
 fun Movie.isSame(other: Movie) = id == other.id
+
+data class MovieDetails(
+    val id: Int,
+    val minimumAge: Int,
+    val backdropPath: String,
+    val genres: List<Genre>,
+    val voteAverage: Float,
+    val voteCount: Int,
+    val title: String,
+    val overview: String,
+)
