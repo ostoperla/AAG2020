@@ -11,7 +11,8 @@ import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val api: TmdbAPI,
-    private val dispatchers: DispatchersProvider
+    private val dispatchers: DispatchersProvider,
+    private val configCache: ConfigurationCache
 ) : MovieRepository {
 
     override suspend fun getNowPlayingMoviesList(): List<Movie> = withContext(dispatchers.io()) {
@@ -110,11 +111,11 @@ class MovieRepositoryImpl @Inject constructor(
         )
     }
 
-    private fun createAbsoluteUrl(relativeUrl: String?) =
-        relativeUrl?.let { "$SECURE_BASE_URL$IMAGE_SIZE$it" } ?: ""
-
-    companion object {
-        private const val SECURE_BASE_URL = "https://image.tmdb.org/t/p/"
-        private const val IMAGE_SIZE = "w342"
+    private fun createAbsoluteUrl(relativeUrl: String?): String {
+        return configCache.get()?.let { config ->
+            relativeUrl?.let {
+                "${config.secureBaseUrl}${config.imageSize}$it"
+            } ?: ""
+        } ?: ""
     }
 }
