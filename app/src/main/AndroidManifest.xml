@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AAG2020">
-        <activity android:name="com.trelp.aag2020.presentation.view.MainActivity">
+        <activity
+            android:name="com.trelp.aag2020.presentation.view.MainActivity"
+            android:theme="@style/Theme.AAG2020.Splash"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

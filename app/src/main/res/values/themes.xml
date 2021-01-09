@@ -15,4 +15,8 @@
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">@color/steel_gray</item>
     </style>
+
+    <style name="Theme.AAG2020.Splash">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
 </resources>
