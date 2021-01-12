@@ -59,7 +59,7 @@ object NetworkModule {
             addNetworkInterceptor(errorResponseInterceptor)
             if (BuildConfig.DEBUG) {
                 addInterceptor(loggingInterceptor)
-                addNetworkInterceptor(loggingInterceptor)
+//                addNetworkInterceptor(loggingInterceptor)
             }
         }.build()
     }

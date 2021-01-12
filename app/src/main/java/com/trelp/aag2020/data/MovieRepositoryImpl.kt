@@ -1,6 +1,7 @@
 package com.trelp.aag2020.data
 
 import com.trelp.aag2020.data.network.TmdbAPI
+import com.trelp.aag2020.data.storage.PrefsManager
 import com.trelp.aag2020.domain.MovieRepository
 import com.trelp.aag2020.domain.entity.Actor
 import com.trelp.aag2020.domain.entity.Genre
@@ -12,8 +13,11 @@ import javax.inject.Inject
 class MovieRepositoryImpl @Inject constructor(
     private val api: TmdbAPI,
     private val dispatchers: DispatchersProvider,
-    private val configCache: ConfigurationCache
+    private val prefs: PrefsManager
 ) : MovieRepository {
+
+    override suspend fun getConfiguration() =
+        prefs.config ?: api.getConfiguration().also { prefs.config = it }
 
     override suspend fun getNowPlayingMoviesList(): List<Movie> = withContext(dispatchers.io()) {
         val genresMap = getGenresList().associateBy { it.id }
@@ -93,7 +97,7 @@ class MovieRepositoryImpl @Inject constructor(
             }
     }
 
-    private fun convertToMovieEntity(
+    private suspend fun convertToMovieEntity(
         movie: com.trelp.aag2020.data.model.Movie,
         genresMap: Map<Int, Genre>
     ): Movie {
@@ -110,12 +114,13 @@ class MovieRepositoryImpl @Inject constructor(
             runtime = 777
         )
     }
-
-    private fun createAbsoluteUrl(relativeUrl: String?): String {
-        return configCache.get()?.let { config ->
-            relativeUrl?.let {
-                "${config.secureBaseUrl}${config.imageSize}$it"
-            } ?: ""
+    private suspend fun createAbsoluteUrl(relativeUrl: String?): String {
+        return relativeUrl?.let {
+            "${getConfiguration().images.secureBaseUrl}$IMAGE_SIZE$it"
         } ?: ""
+    }
+
+    companion object {
+        private const val IMAGE_SIZE = "w342"
     }
 }

@@ -1,11 +1,13 @@
 package com.trelp.aag2020.domain
 
+import com.trelp.aag2020.data.model.ConfigurationResponse
 import com.trelp.aag2020.domain.entity.Actor
 import com.trelp.aag2020.domain.entity.Genre
 import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.domain.entity.MovieDetails
 
 interface MovieRepository {
+    suspend fun getConfiguration(): ConfigurationResponse
     suspend fun getNowPlayingMoviesList(): List<Movie>
     suspend fun getPopularMoviesList(): List<Movie>
     suspend fun getTopRatedMoviesList(): List<Movie>
