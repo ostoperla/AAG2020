@@ -30,7 +30,7 @@ class MovieDetailsViewModel constructor(
     private fun loadMovieDetails() {
         viewModelScope.launch {
             _movie.value = movieRepository.getMovieDetails(movieId)
-            _actors.value = movieRepository.getActorsList(movieId)
+            _actors.value = movieRepository.getActors(movieId)
         }
     }
 

@@ -3,8 +3,11 @@ package com.trelp.aag2020.presentation.viewmodel.movies
 import androidx.lifecycle.*
 import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.domain.MovieRepository
+import com.trelp.aag2020.domain.entity.MovieFilter
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
+import kotlin.system.measureTimeMillis
 
 class MoviesListViewModel @Inject constructor(
     private val movieRepository: MovieRepository
@@ -20,7 +23,10 @@ class MoviesListViewModel @Inject constructor(
 
     private fun loadMoviesList() {
         viewModelScope.launch {
-            _movies.value = movieRepository.getNowPlayingMoviesList()
+            val time = measureTimeMillis {
+                _movies.value = movieRepository.getMovies(MovieFilter.TOP_RATED)
+            }
+            Timber.d("$time ms")
         }
     }
 }
