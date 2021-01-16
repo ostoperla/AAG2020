@@ -3,6 +3,8 @@ package com.trelp.aag2020.presentation.view.movies
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,6 +19,7 @@ import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxOffset
 import com.trelp.aag2020.presentation.viewmodel.movies.MoviesListViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
@@ -60,16 +63,62 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
 
         initMoviesList()
 
-        viewModel.movies.observe(viewLifecycleOwner) { updateMoviesList(it) }
+        viewModel.movies.observe(viewLifecycleOwner) { renderState(it) }
+
+        with(binding) {
+            swipeToRefresh.setOnRefreshListener { viewModel.refreshMovies() }
+            refresh.setOnClickListener { viewModel.refreshMovies() }
+        }
     }
 
     private fun updateMoviesList(data: List<Movie>) {
-        binding.listMovie.adapter = movieAdapter.also { it.submitList(data) }
+        movieAdapter.submitList(data)
+    }
+
+    private fun renderState(state: MoviesListViewModel.ViewState) {
+        Timber.d(state.javaClass.simpleName)
+        when (state) {
+            MoviesListViewModel.ViewState.EmptyProgress -> with(binding) {
+                listGroup.isVisible = false
+                infoGroup.isVisible = false
+                listProgress.isVisible = true
+                swipeToRefresh.isRefreshing = false
+            }
+            is MoviesListViewModel.ViewState.Refresh -> with(binding) {
+                updateMoviesList(state.data)
+                listGroup.isVisible = true
+                infoGroup.isVisible = false
+                listProgress.isVisible = false
+                swipeToRefresh.isRefreshing = true
+            }
+            is MoviesListViewModel.ViewState.Data -> with(binding) {
+                updateMoviesList(state.data)
+                listGroup.isVisible = true
+                infoGroup.isVisible = false
+                listProgress.isVisible = false
+                swipeToRefresh.isRefreshing = false
+            }
+            MoviesListViewModel.ViewState.Empty -> with(binding) {
+                infoGroup.isVisible = true
+                listGroup.isVisible = false
+                listProgress.isVisible = false
+                swipeToRefresh.isRefreshing = false
+                Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()
+            }
+            is MoviesListViewModel.ViewState.Error -> with(binding) {
+                infoGroup.isVisible = true
+                listGroup.isVisible = false
+                listProgress.isVisible = false
+                swipeToRefresh.isRefreshing = false
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun initMoviesList() {
         with(binding.listMovie) {
             setHasFixedSize(true)
+            adapter = movieAdapter
             addItemDecoration(
                 MovieOffsetItemDecoration(context.dp2pxOffset(R.dimen.item_movie_offset))
             )
@@ -81,6 +130,12 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
         itemClickListener = null
 
         super.onDetach()
+    }
+
+    override fun onDestroyView() {
+        binding.listMovie.adapter = null
+
+        super.onDestroyView()
     }
 
     override fun createComponent() =
