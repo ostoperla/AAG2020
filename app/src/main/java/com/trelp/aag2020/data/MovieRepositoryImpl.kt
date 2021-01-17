@@ -51,6 +51,7 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getMovieDetails(movieId: Int) = withContext(dispatchers.io()) {
         val movie = api.getDetails(movieId)
+        val actors = getActors(movieId)
 
         MovieDetails(
             id = movie.id,
@@ -65,7 +66,8 @@ class MovieRepositoryImpl @Inject constructor(
             voteAverage = movie.voteAverage,
             voteCount = movie.voteCount,
             title = movie.originalTitle,
-            overview = movie.overview
+            overview = movie.overview,
+            actors = actors
         )
     }
 

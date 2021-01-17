@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.Px
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -23,6 +24,7 @@ import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxSize
 import com.trelp.aag2020.presentation.view.common.utils.loadImage
 import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
@@ -58,8 +60,8 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
 
         initActorsList()
 
-        viewModel.movie.observe(viewLifecycleOwner) { setupDetails(it) }
-        viewModel.actors.observe(viewLifecycleOwner) { setupActors(it) }
+        viewModel.movie.observe(viewLifecycleOwner) { renderState(it) }
+//        viewModel.actors.observe(viewLifecycleOwner) { setupActors(it) }
     }
 
     private fun setupDetails(movie: MovieDetails?) {
@@ -89,6 +91,38 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
                 textMovieCast.isVisible = false
                 listActor.isVisible = false
             }
+        }
+    }
+
+    private fun renderState(state: MovieDetailsViewModel.ViewState) {
+        Timber.d(state.javaClass.simpleName)
+        when (state) {
+            MovieDetailsViewModel.ViewState.Loading -> Toast.makeText(
+                requireContext(),
+                "Loading",
+                Toast.LENGTH_SHORT
+            ).show()
+            is MovieDetailsViewModel.ViewState.Data -> {
+                with(binding) {
+                    imageMovieLogo.loadImage(state.data.backdropPath)
+                    textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
+                    textMovieRatingSystem.text = state.data.minimumAge.toString()
+                    textMovieName.text = state.data.title
+                    textMovieTags.text = state.data.genres.joinToString { genre -> genre.name }
+                    textMovieReviews.text = resources.getQuantityString(
+                        R.plurals.movie_reviews,
+                        state.data.voteCount,
+                        state.data.voteCount
+                    )
+                    textMovieStorylineContent.text = state.data.overview
+                }
+                setupActors(state.data.actors)
+            }
+            is MovieDetailsViewModel.ViewState.Error -> Toast.makeText(
+                requireContext(),
+                "Error",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
