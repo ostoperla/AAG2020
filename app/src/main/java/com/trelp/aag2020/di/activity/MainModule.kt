@@ -4,40 +4,32 @@ import android.content.Context
 import com.trelp.aag2020.data.AppDispatchers
 import com.trelp.aag2020.data.DispatchersProvider
 import com.trelp.aag2020.data.MovieRepositoryImpl
-import com.trelp.aag2020.data.network.TmdbAPI
 import com.trelp.aag2020.data.storage.PrefsManager
 import com.trelp.aag2020.di.ActivityScope
 import com.trelp.aag2020.di.AppContext
 import com.trelp.aag2020.domain.MovieRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import kotlinx.serialization.json.Json
 
 @Module
-object MainModule {
+abstract class MainModule {
 
-    @Provides
+    @Binds
     @ActivityScope
-    fun provideDispatchers(): DispatchersProvider {
-        return AppDispatchers()
-    }
+    abstract fun bindDispatchers(dispatchersImpl: AppDispatchers): DispatchersProvider
 
-    @Provides
+    @Binds
     @ActivityScope
-    fun providePrefsManager(
-        @AppContext context: Context,
-        json: Json
-    ): PrefsManager {
-        return PrefsManager(context, json)
-    }
+    abstract fun bindMovieRepository(movieRepositoryImpl: MovieRepositoryImpl): MovieRepository
 
-    @Provides
-    @ActivityScope
-    fun provideMoviesRepository(
-        tmdbApi: TmdbAPI,
-        dispatchers: DispatchersProvider,
-        prefsManager: PrefsManager
-    ): MovieRepository {
-        return MovieRepositoryImpl(tmdbApi, dispatchers, prefsManager)
+    companion object {
+
+        @Provides
+        @ActivityScope
+        fun providePrefsManager(@AppContext context: Context, json: Json): PrefsManager {
+            return PrefsManager(context, json)
+        }
     }
 }

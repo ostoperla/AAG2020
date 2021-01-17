@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_AAG2020)
 
-        Injector.getOrCreateComponent(this).inject(this)
+        Injector.getOrCreateComponent(this)
 
         super.onCreate(savedInstanceState)
 

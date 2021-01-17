@@ -4,7 +4,6 @@ import com.trelp.aag2020.di.ActivityScope
 import com.trelp.aag2020.di.ImComponent
 import com.trelp.aag2020.di.details.DetailsComponent
 import com.trelp.aag2020.di.movies.MoviesComponent
-import com.trelp.aag2020.presentation.view.MainActivity
 import dagger.Subcomponent
 
 @Subcomponent(
@@ -24,6 +23,4 @@ interface ActivityComponent : ImComponent {
 
     fun moviesComponentFactory(): MoviesComponent.Factory
     fun detailsComponentFactory(): DetailsComponent.Factory
-
-    fun inject(tmdbActivity: MainActivity)
 }

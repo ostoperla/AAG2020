@@ -1,8 +1,9 @@
 package com.trelp.aag2020.data
 
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class AppDispatchers : DispatchersProvider {
+class AppDispatchers @Inject constructor() : DispatchersProvider {
 
     override fun default() = Dispatchers.Default
 
