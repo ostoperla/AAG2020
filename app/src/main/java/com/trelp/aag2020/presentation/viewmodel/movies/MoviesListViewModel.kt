@@ -1,29 +1,23 @@
 package com.trelp.aag2020.presentation.viewmodel.movies
 
-import androidx.lifecycle.*
+import androidx.lifecycle.viewModelScope
 import com.trelp.aag2020.domain.MovieRepository
-import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.domain.entity.MovieFilter
-import com.trelp.aag2020.presentation.viewmodel.movies.MoviesListViewModel.ViewState.*
+import com.trelp.aag2020.presentation.viewmodel.common.BaseViewModel
+import com.trelp.aag2020.presentation.viewmodel.movies.ViewState.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 class MoviesListViewModel @Inject constructor(
     private val movieRepository: MovieRepository
-) : ViewModel() {
-
-    private var currentState: ViewState = EmptyProgress
-    private val _movies = MutableLiveData(currentState)
-    val movies: LiveData<ViewState>
-        get() = _movies
+) : BaseViewModel<Action, ViewState>(EmptyProgress) {
 
     init {
         loadMovies()
     }
 
     fun refreshMovies() {
-        _movies.value = proceed(Action.Refresh)
+        stateMutableLiveData.value = proceed(Action.Refresh)
         loadMovies()
     }
 
@@ -39,57 +33,32 @@ class MoviesListViewModel @Inject constructor(
             } catch (e: Throwable) {
                 Action.Error(e)
             }
-            _movies.value = proceed(action)
+            stateMutableLiveData.value = proceed(action)
         }
     }
 
-    private fun proceed(action: Action): ViewState {
-        Timber.d("Action ${action.javaClass.simpleName}")
-        val newState = reducer(action, currentState)
-        if (newState != currentState) {
-            currentState = newState
-            Timber.d("      ViewState ${currentState.javaClass.simpleName}")
-        }
-        return currentState
-    }
-
-    private fun reducer(action: Action, state: ViewState) = when (state) {
+    override fun reducer(action: Action) = when (currentState) {
         EmptyProgress -> when (action) {
             is Action.LoadData -> Data(action.data)
             is Action.EmptyData -> Empty
             is Action.Error -> Error(action.error)
-            else -> state
+            else -> currentState
         }
         is Refresh -> when (action) {
             is Action.LoadData -> Data(action.data)
             is Action.EmptyData -> Empty
             is Action.Error -> Error(action.error)
-            else -> state
+            else -> currentState
         }
         is Data -> when (action) {
-            Action.Refresh -> Refresh(state.data)
+            Action.Refresh -> Refresh
             is Action.LoadData -> Data(action.data)
             is Action.EmptyData -> Empty
             is Action.Error -> Error(action.error)
         }
         Empty, is Error -> when (action) {
             Action.Refresh -> EmptyProgress
-            else -> state
+            else -> currentState
         }
-    }
-
-    sealed class ViewState {
-        object EmptyProgress : ViewState()
-        data class Refresh(val data: List<Movie>) : ViewState()
-        data class Data(val data: List<Movie>) : ViewState()
-        object Empty : ViewState()
-        data class Error(val error: Throwable) : ViewState()
-    }
-
-    sealed class Action {
-        object Refresh : Action()
-        data class LoadData(val data: List<Movie>) : Action()
-        object EmptyData: Action()
-        data class Error(val error: Throwable) : Action()
     }
 }

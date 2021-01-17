@@ -24,6 +24,8 @@ import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxSize
 import com.trelp.aag2020.presentation.view.common.utils.loadImage
 import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel
+import com.trelp.aag2020.presentation.viewmodel.details.ViewState
+import com.trelp.aag2020.presentation.viewmodel.details.ViewState.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -60,7 +62,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
 
         initActorsList()
 
-        viewModel.movie.observe(viewLifecycleOwner) { renderState(it) }
+        viewModel.stateLiveData.observe(viewLifecycleOwner) { renderState(it) }
 //        viewModel.actors.observe(viewLifecycleOwner) { setupActors(it) }
     }
 
@@ -94,15 +96,15 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
         }
     }
 
-    private fun renderState(state: MovieDetailsViewModel.ViewState) {
+    private fun renderState(state: ViewState) {
         Timber.d(state.javaClass.simpleName)
         when (state) {
-            MovieDetailsViewModel.ViewState.Loading -> Toast.makeText(
+            Loading -> Toast.makeText(
                 requireContext(),
                 "Loading",
                 Toast.LENGTH_SHORT
             ).show()
-            is MovieDetailsViewModel.ViewState.Data -> {
+            is Data -> {
                 with(binding) {
                     imageMovieLogo.loadImage(state.data.backdropPath)
                     textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
@@ -118,7 +120,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
                 }
                 setupActors(state.data.actors)
             }
-            is MovieDetailsViewModel.ViewState.Error -> Toast.makeText(
+            is Error -> Toast.makeText(
                 requireContext(),
                 "Error",
                 Toast.LENGTH_SHORT

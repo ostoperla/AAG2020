@@ -19,6 +19,8 @@ import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxOffset
 import com.trelp.aag2020.presentation.viewmodel.movies.MoviesListViewModel
+import com.trelp.aag2020.presentation.viewmodel.movies.ViewState
+import com.trelp.aag2020.presentation.viewmodel.movies.ViewState.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -63,7 +65,7 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
 
         initMoviesList()
 
-        viewModel.movies.observe(viewLifecycleOwner) { renderState(it) }
+        viewModel.stateLiveData.observe(viewLifecycleOwner) { renderState(it) }
 
         with(binding) {
             swipeToRefresh.setOnRefreshListener { viewModel.refreshMovies() }
@@ -75,37 +77,36 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
         movieAdapter.submitList(data)
     }
 
-    private fun renderState(state: MoviesListViewModel.ViewState) {
+    private fun renderState(state: ViewState) {
         Timber.d(state.javaClass.simpleName)
         when (state) {
-            MoviesListViewModel.ViewState.EmptyProgress -> with(binding) {
+            EmptyProgress -> with(binding) {
                 listGroup.isVisible = false
                 infoGroup.isVisible = false
                 listProgress.isVisible = true
                 swipeToRefresh.isRefreshing = false
             }
-            is MoviesListViewModel.ViewState.Refresh -> with(binding) {
-                updateMoviesList(state.data)
+            Refresh -> with(binding) {
                 listGroup.isVisible = true
                 infoGroup.isVisible = false
                 listProgress.isVisible = false
                 swipeToRefresh.isRefreshing = true
             }
-            is MoviesListViewModel.ViewState.Data -> with(binding) {
+            is Data -> with(binding) {
                 updateMoviesList(state.data)
                 listGroup.isVisible = true
                 infoGroup.isVisible = false
                 listProgress.isVisible = false
                 swipeToRefresh.isRefreshing = false
             }
-            MoviesListViewModel.ViewState.Empty -> with(binding) {
+            Empty -> with(binding) {
                 infoGroup.isVisible = true
                 listGroup.isVisible = false
                 listProgress.isVisible = false
                 swipeToRefresh.isRefreshing = false
                 Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()
             }
-            is MoviesListViewModel.ViewState.Error -> with(binding) {
+            is Error -> with(binding) {
                 infoGroup.isVisible = true
                 listGroup.isVisible = false
                 listProgress.isVisible = false
