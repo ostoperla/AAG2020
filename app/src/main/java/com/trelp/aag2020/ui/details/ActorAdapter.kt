@@ -23,6 +23,7 @@ class ActorAdapter : RecyclerView.Adapter<ActorAdapter.ActorHolder>() {
     override fun getItemCount() = data.size
 
     fun setupData(newData: List<Actor>) {
+        data.clear()
         data.plusAssign(newData)
         notifyDataSetChanged()
     }
