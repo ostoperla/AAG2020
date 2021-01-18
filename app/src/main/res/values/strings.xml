@@ -13,7 +13,9 @@
         <item quantity="one">%1$d review</item>
         <item quantity="other">%1$d reviews</item>
     </plurals>
+    <string name="action_refresh">Refresh</string>
     <!--</editor-fold>-->
 
     <string name="movie_like_description">Like</string>
+    <string name="brand_description">The Movie Database</string>
 </resources>

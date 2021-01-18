@@ -69,7 +69,7 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
 
         with(binding) {
             swipeToRefresh.setOnRefreshListener { viewModel.refreshMovies() }
-            refresh.setOnClickListener { viewModel.refreshMovies() }
+            emptyView.btnRefresh.setOnClickListener { viewModel.refreshMovies() }
         }
     }
 
@@ -82,36 +82,38 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
         when (state) {
             EmptyProgress -> with(binding) {
                 listGroup.isVisible = false
-                infoGroup.isVisible = false
-                listProgress.isVisible = true
+                emptyView.root.isVisible = false
+                listProgress.root.isVisible = true
                 swipeToRefresh.isRefreshing = false
             }
             Refresh -> with(binding) {
                 listGroup.isVisible = true
-                infoGroup.isVisible = false
-                listProgress.isVisible = false
+                emptyView.root.isVisible = false
+                listProgress.root.isVisible = false
                 swipeToRefresh.isRefreshing = true
             }
             is Data -> with(binding) {
                 updateMoviesList(state.data)
                 listGroup.isVisible = true
-                infoGroup.isVisible = false
-                listProgress.isVisible = false
+                emptyView.root.isVisible = false
+                listProgress.root.isVisible = false
                 swipeToRefresh.isRefreshing = false
             }
             Empty -> with(binding) {
-                infoGroup.isVisible = true
                 listGroup.isVisible = false
-                listProgress.isVisible = false
+                emptyView.root.isVisible = true
+                listProgress.root.isVisible = false
                 swipeToRefresh.isRefreshing = false
-                Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()
+                emptyView.textTitle.text = "Ooooops!!!"         // TODO: 18.01.2021 поправить
+                emptyView.textDescription.text = "Empty data"
             }
             is Error -> with(binding) {
-                infoGroup.isVisible = true
                 listGroup.isVisible = false
-                listProgress.isVisible = false
+                emptyView.root.isVisible = true
+                listProgress.root.isVisible = false
                 swipeToRefresh.isRefreshing = false
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+                emptyView.textTitle.text = "Ooooops!!!"         // TODO: 18.01.2021 поправить
+                emptyView.textDescription.text = "Error ${state.error}"
             }
         }
     }
