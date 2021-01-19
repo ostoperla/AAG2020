@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.Px
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.trelp.aag2020.R
 import com.trelp.aag2020.databinding.FragmentMovieDetailsBinding
 import com.trelp.aag2020.di.ComponentOwner
@@ -35,8 +37,11 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
     private val binding
         get() = viewBinding!! as FragmentMovieDetailsBinding
 
+    private var snackbar: Snackbar? = null
+
     @Inject
     lateinit var movieInteractor: MovieInteractor
+
     @Inject
     lateinit var actorInteractor: ActorInteractor
 
@@ -90,15 +95,34 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
     }
 
     private fun renderActorsList(state: ActorsListViewModel.ViewState) {
-        Toast.makeText(requireContext(), "Actors", Toast.LENGTH_SHORT).show()
-//        if (data.isNotEmpty()) {
-//            actorAdapter.setupData(data)
-//        } else {
-//            with(binding) {
-//                textMovieCast.isVisible = false
-//                listActor.isVisible = false
-//            }
-//        }
+        when (state) {
+            ActorsListViewModel.ViewState.EmptyProgress -> with(binding) {
+                listProgress.root.isVisible = true
+                textMovieCast.isVisible = true
+                listActor.isVisible = false
+            }
+            is ActorsListViewModel.ViewState.Data -> with(binding) {
+                listProgress.root.isVisible = false
+                listActor.isVisible = true
+                actorAdapter.setupData(state.data)
+            }
+            ActorsListViewModel.ViewState.Empty -> with(binding) {
+                listProgress.root.isVisible = false
+                textMovieCast.isVisible = false
+                listActor.isVisible = false
+                snackbar = Snackbar.make(root, getString(R.string.empty_data), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getString(R.string.action_refresh)) { actorsViewModel.refreshActors() }
+                snackbar?.show()
+            }
+            is ActorsListViewModel.ViewState.Error -> with(binding) {
+                listProgress.root.isVisible = false
+                textMovieCast.isVisible = false
+                listActor.isVisible = false
+                snackbar = Snackbar.make(root, getString(R.string.empty_error), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getString(R.string.action_refresh)) { actorsViewModel.refreshActors() }
+                snackbar?.show()
+            }
+        }
     }
 
     private fun renderDetailsInfo(state: ViewState) {
@@ -123,7 +147,6 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
                     )
                     textMovieStorylineContent.text = state.data.overview
                 }
-//                setupActors(state.data.actors)
             }
             is Error -> Toast.makeText(
                 requireContext(),
@@ -155,6 +178,12 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
                 override fun getIntrinsicHeight() = height
             }
         )
+    }
+
+    override fun onDestroyView() {
+        snackbar?.dismiss()
+
+        super.onDestroyView()
     }
 
     override fun onDetach() {

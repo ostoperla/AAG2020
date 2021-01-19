@@ -18,4 +18,6 @@
 
     <string name="movie_like_description">Like</string>
     <string name="brand_description">The Movie Database</string>
+    <string name="empty_error">Oooopps!!!</string>
+    <string name="empty_data">Empty data</string>
 </resources>

@@ -55,7 +55,10 @@
     <dimen name="image_logo_height">100dp</dimen>
     <dimen name="progress_width">60dp</dimen>
     <dimen name="progress_height">60dp</dimen>
+    <dimen name="actors_progress_width">50dp</dimen>
+    <dimen name="actors_progress_height">50dp</dimen>
     <dimen name="item_movie_offset">12dp</dimen>
     <dimen name="item_actor_offset">8dp</dimen>
     <dimen name="stroke_width_1">1dp</dimen>
+    <dimen name="image_movie_logo_height">300dp</dimen>
 </resources>
