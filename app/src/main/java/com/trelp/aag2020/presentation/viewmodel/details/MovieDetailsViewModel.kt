@@ -25,7 +25,7 @@ class MovieDetailsViewModel constructor(
             } catch (e: Throwable) {
                 Action.Error(e)
             }
-            stateMutableLiveData.value = proceed(action)
+            proceed(action)
         }
     }
 

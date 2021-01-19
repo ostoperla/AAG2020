@@ -22,7 +22,7 @@ class ActorsListViewModel constructor(
     }
 
     fun refreshActors() {
-        stateMutableLiveData.value = proceed(Action.Refresh)
+        proceed(Action.Refresh)
         loadActors()
     }
 
@@ -38,7 +38,7 @@ class ActorsListViewModel constructor(
             } catch (e: Throwable) {
                 Action.Error(e)
             }
-            stateMutableLiveData.value = proceed(action)
+            proceed(action)
         }
     }
 

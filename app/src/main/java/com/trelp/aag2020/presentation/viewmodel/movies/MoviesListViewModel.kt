@@ -16,7 +16,7 @@ class MoviesListViewModel @Inject constructor(
     }
 
     fun refreshMovies() {
-        stateMutableLiveData.value = proceed(Action.Refresh)
+        proceed(Action.Refresh)
         loadMovies()
     }
 
@@ -32,7 +32,7 @@ class MoviesListViewModel @Inject constructor(
             } catch (e: Throwable) {
                 Action.Error(e)
             }
-            stateMutableLiveData.value = proceed(action)
+            proceed(action)
         }
     }
 
