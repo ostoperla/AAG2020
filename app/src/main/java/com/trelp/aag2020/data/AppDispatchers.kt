@@ -4,12 +4,8 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 class AppDispatchers @Inject constructor() : DispatchersProvider {
-
-    override fun default() = Dispatchers.Default
-
-    override fun io() = Dispatchers.IO
-
-    override fun main() = Dispatchers.Main
-
-    override fun unconfined() = Dispatchers.Unconfined
+    override val default = Dispatchers.Default
+    override val io = Dispatchers.IO
+    override val main = Dispatchers.Main
+    override val unconfined = Dispatchers.Unconfined
 }

@@ -1,15 +1,14 @@
 package com.trelp.aag2020.presentation.viewmodel.movies
 
 import androidx.lifecycle.viewModelScope
-import com.trelp.aag2020.domain.MovieRepository
-import com.trelp.aag2020.domain.entity.MovieFilter
+import com.trelp.aag2020.domain.interactor.MovieInteractor
 import com.trelp.aag2020.presentation.viewmodel.common.BaseViewModel
 import com.trelp.aag2020.presentation.viewmodel.movies.ViewState.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MoviesListViewModel @Inject constructor(
-    private val movieRepository: MovieRepository
+    private val movieInteractor: MovieInteractor
 ) : BaseViewModel<Action, ViewState>(EmptyProgress) {
 
     init {
@@ -21,10 +20,10 @@ class MoviesListViewModel @Inject constructor(
         loadMovies()
     }
 
-    private fun loadMovies(filter: MovieFilter = MovieFilter.TOP_RATED) {
+    private fun loadMovies() {
         viewModelScope.launch {
             val action = try {
-                val movies = movieRepository.getMovies(filter)
+                val movies = movieInteractor.getMovies()
                 if (movies.isNullOrEmpty()) {
                     Action.EmptyData
                 } else {

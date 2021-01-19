@@ -26,7 +26,7 @@ interface TmdbAPI {
     suspend fun getUpcoming(): MoviesResponse
 
     @GET("movie/{movie_id}")
-    suspend fun getDetails(
+    suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int
     ): MovieDetailsResponse
 
@@ -36,5 +36,5 @@ interface TmdbAPI {
     ): CastResponse
 
     @GET("genre/movie/list")
-    suspend fun getGenresForMovies(): GenresResponse
+    suspend fun getGenres(): GenresResponse
 }

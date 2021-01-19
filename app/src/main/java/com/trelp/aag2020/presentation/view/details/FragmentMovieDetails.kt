@@ -6,23 +6,23 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.Px
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
-import com.trelp.aag2020.domain.entity.Actor
 import com.trelp.aag2020.databinding.FragmentMovieDetailsBinding
 import com.trelp.aag2020.di.ComponentOwner
 import com.trelp.aag2020.di.Injector
 import com.trelp.aag2020.di.activity.ActivityComponent
 import com.trelp.aag2020.di.details.DetailsComponent
-import com.trelp.aag2020.domain.MovieRepository
 import com.trelp.aag2020.domain.entity.MovieDetails
+import com.trelp.aag2020.domain.interactor.ActorInteractor
+import com.trelp.aag2020.domain.interactor.MovieInteractor
 import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxSize
 import com.trelp.aag2020.presentation.view.common.utils.loadImage
+import com.trelp.aag2020.presentation.viewmodel.details.ActorsListViewModel
 import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel
 import com.trelp.aag2020.presentation.viewmodel.details.ViewState
 import com.trelp.aag2020.presentation.viewmodel.details.ViewState.*
@@ -36,10 +36,15 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
         get() = viewBinding!! as FragmentMovieDetailsBinding
 
     @Inject
-    lateinit var moviesRepository: MovieRepository
+    lateinit var movieInteractor: MovieInteractor
+    @Inject
+    lateinit var actorInteractor: ActorInteractor
 
-    private val viewModel: MovieDetailsViewModel by viewModels {
-        MovieDetailsViewModel.factory(moviesRepository, arguments?.getInt(ARG_MOVIE_ID) ?: 0)
+    private val detailsViewModel: MovieDetailsViewModel by viewModels {
+        MovieDetailsViewModel.factory(movieInteractor, arguments?.getInt(ARG_MOVIE_ID) ?: 0)
+    }
+    private val actorsViewModel: ActorsListViewModel by viewModels {
+        ActorsListViewModel.factory(actorInteractor, arguments?.getInt(ARG_MOVIE_ID) ?: 0)
     }
 
     private val actorAdapter by lazy { ActorAdapter() }
@@ -62,8 +67,8 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
 
         initActorsList()
 
-        viewModel.stateLiveData.observe(viewLifecycleOwner) { renderState(it) }
-//        viewModel.actors.observe(viewLifecycleOwner) { setupActors(it) }
+        detailsViewModel.stateLiveData.observe(viewLifecycleOwner) { renderDetailsInfo(it) }
+        actorsViewModel.stateLiveData.observe(viewLifecycleOwner) { renderActorsList(it) }
     }
 
     private fun setupDetails(movie: MovieDetails?) {
@@ -80,23 +85,23 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
                     it.voteCount
                 )
                 textMovieStorylineContent.text = it.overview
-//                setupActors(it.actors)
             }
         }
     }
 
-    private fun setupActors(data: List<Actor>) {
-        if (data.isNotEmpty()) {
-            actorAdapter.setupData(data)
-        } else {
-            with(binding) {
-                textMovieCast.isVisible = false
-                listActor.isVisible = false
-            }
-        }
+    private fun renderActorsList(state: ActorsListViewModel.ViewState) {
+        Toast.makeText(requireContext(), "Actors", Toast.LENGTH_SHORT).show()
+//        if (data.isNotEmpty()) {
+//            actorAdapter.setupData(data)
+//        } else {
+//            with(binding) {
+//                textMovieCast.isVisible = false
+//                listActor.isVisible = false
+//            }
+//        }
     }
 
-    private fun renderState(state: ViewState) {
+    private fun renderDetailsInfo(state: ViewState) {
         Timber.d(state.javaClass.simpleName)
         when (state) {
             Loading -> Toast.makeText(
@@ -118,7 +123,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
                     )
                     textMovieStorylineContent.text = state.data.overview
                 }
-                setupActors(state.data.actors)
+//                setupActors(state.data.actors)
             }
             is Error -> Toast.makeText(
                 requireContext(),

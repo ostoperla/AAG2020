@@ -21,6 +21,5 @@ data class MovieDetails(
     val voteAverage: Float,
     val voteCount: Int,
     val title: String,
-    val overview: String,
-    val actors: List<Actor>
+    val overview: String
 )
