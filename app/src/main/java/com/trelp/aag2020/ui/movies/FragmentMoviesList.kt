@@ -6,7 +6,6 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trelp.aag2020.R
 import com.trelp.aag2020.data.MoviesDataSource
-import com.trelp.aag2020.data.isSame
 import com.trelp.aag2020.databinding.FragmentMoviesListBinding
 import com.trelp.aag2020.ui.common.BaseFragment
 import com.trelp.aag2020.ui.common.utils.dp2pxOffset
@@ -18,12 +17,7 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
 
     private var itemClickListener: OnItemClickListener? = null
 
-    private val movieAdapter by lazy {
-        MovieAdapter(
-            { old, new -> old.isSame(new) },
-            itemClickListener
-        )
-    }
+    private val movieAdapter by lazy { MovieAdapter(itemClickListener) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
