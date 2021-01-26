@@ -5,7 +5,6 @@ import com.trelp.aag2020.data.mapper.GenreMapper
 import com.trelp.aag2020.data.mapper.MovieDetailsMapper
 import com.trelp.aag2020.data.mapper.MovieMapper
 import com.trelp.aag2020.data.network.TmdbAPI
-import com.trelp.aag2020.data.storage.PrefsManager
 import com.trelp.aag2020.domain.repository.MovieRepository
 import com.trelp.aag2020.domain.entity.MovieFilter
 import kotlinx.coroutines.async
@@ -15,7 +14,6 @@ import javax.inject.Inject
 class MovieRepositoryImpl @Inject constructor(
     private val api: TmdbAPI,
     private val dispatchers: DispatchersProvider,
-    private val prefs: PrefsManager,
     private val genreMapper: GenreMapper,
     private val movieMapper: MovieMapper,
     private val movieDetailsMapper: MovieDetailsMapper
@@ -51,16 +49,4 @@ class MovieRepositoryImpl @Inject constructor(
             genreMapper.map(it)
         }
     }
-
-//    private suspend fun getConfiguration() =
-//        prefs.config ?: api.getConfiguration().also { prefs.config = it }
-//
-//    private suspend fun createPathToImage(relativeUrl: String?) =
-//        relativeUrl?.let {
-//            "${getConfiguration().images.secureBaseUrl}$IMAGE_SIZE$it"
-//        }
-//
-//    companion object {
-//        private const val IMAGE_SIZE = "w342"
-//    }
 }

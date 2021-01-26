@@ -11,7 +11,7 @@ class MovieDetailsMapper @Inject constructor(
     fun map(movie: MovieDetailsResponse): MovieDetails {
         return MovieDetails(
             id = movie.id,
-            minimumAge = if (movie.adult) 16 else 13,
+            minimumAge = if (movie.adult) AGE_16 else AGE_13,
             backdropPath = imageUrlMapper.map(IMAGE_SIZE, movie.backdropPath),
             genres = movie.genres.map {
                 genreMapper.map(it)
@@ -25,5 +25,7 @@ class MovieDetailsMapper @Inject constructor(
 
     companion object {
         private const val IMAGE_SIZE = "w342"
+        private const val AGE_16 = 16
+        private const val AGE_13 = 13
     }
 }

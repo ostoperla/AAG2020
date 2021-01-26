@@ -10,12 +10,13 @@ import com.trelp.aag2020.presentation.viewmodel.common.BaseViewModel
 import com.trelp.aag2020.presentation.viewmodel.common.BaseViewState
 import com.trelp.aag2020.presentation.viewmodel.details.ActorsListViewModel.Action
 import com.trelp.aag2020.presentation.viewmodel.details.ActorsListViewModel.ViewState
+import com.trelp.aag2020.presentation.viewmodel.details.ActorsListViewModel.ViewState.*
 import kotlinx.coroutines.launch
 
 class ActorsListViewModel constructor(
     private val actorInteractor: ActorInteractor,
     private val movieId: Int,
-) : BaseViewModel<Action, ViewState>(ViewState.EmptyProgress) {
+) : BaseViewModel<Action, ViewState>(EmptyProgress) {
 
     init {
         loadActors()
@@ -43,15 +44,15 @@ class ActorsListViewModel constructor(
     }
 
     override fun reducer(action: Action) = when (currentState) {
-        ViewState.EmptyProgress -> when (action) {
-            is Action.NewData -> ViewState.Data(action.data)
-            Action.EmptyData -> ViewState.Empty
-            is Action.Error -> ViewState.Error(action.error)
+        EmptyProgress -> when (action) {
+            is Action.NewData -> Data(action.data)
+            Action.EmptyData -> Empty
+            is Action.Error -> Error(action.error)
             else -> currentState
         }
-        is ViewState.Data -> currentState
-        ViewState.Empty, is ViewState.Error -> when (action) {
-            Action.Refresh -> ViewState.EmptyProgress
+        is Data -> currentState
+        Empty, is Error -> when (action) {
+            Action.Refresh -> EmptyProgress
             else -> currentState
         }
     }

@@ -14,7 +14,7 @@ class MovieMapper @Inject constructor(
     ): com.trelp.aag2020.domain.entity.Movie {
         return com.trelp.aag2020.domain.entity.Movie(
             id = movie.id,
-            minimumAge = if (movie.adult) 16 else 13,
+            minimumAge = if (movie.adult) AGE_16 else AGE_13,
             posterPath = imageUrlMapper.map(IMAGE_SIZE, movie.posterPath),
             genres = movie.genreIds.map {
                 genresMap[it] ?: throw IllegalArgumentException("Genre not found")
@@ -28,5 +28,7 @@ class MovieMapper @Inject constructor(
 
     companion object {
         private const val IMAGE_SIZE = "w342"
+        private const val AGE_16 = 16
+        private const val AGE_13 = 13
     }
 }

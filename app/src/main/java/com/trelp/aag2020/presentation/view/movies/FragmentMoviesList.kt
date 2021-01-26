@@ -3,7 +3,6 @@ package com.trelp.aag2020.presentation.view.movies
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -19,8 +18,6 @@ import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxOffset
 import com.trelp.aag2020.presentation.viewmodel.movies.MoviesListViewModel
-import com.trelp.aag2020.presentation.viewmodel.movies.ViewState
-import com.trelp.aag2020.presentation.viewmodel.movies.ViewState.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -77,29 +74,29 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
         movieAdapter.submitList(data)
     }
 
-    private fun renderState(state: ViewState) {
+    private fun renderState(state: MoviesListViewModel.ViewState) {
         Timber.d(state.javaClass.simpleName)
         when (state) {
-            EmptyProgress -> with(binding) {
+            MoviesListViewModel.ViewState.EmptyProgress -> with(binding) {
                 listGroup.isVisible = false
                 emptyView.root.isVisible = false
                 listProgress.root.isVisible = true
                 swipeToRefresh.isRefreshing = false
             }
-            Refresh -> with(binding) {
+            MoviesListViewModel.ViewState.Refresh -> with(binding) {
                 listGroup.isVisible = true
                 emptyView.root.isVisible = false
                 listProgress.root.isVisible = false
                 swipeToRefresh.isRefreshing = true
             }
-            is Data -> with(binding) {
+            is MoviesListViewModel.ViewState.Data -> with(binding) {
                 updateMoviesList(state.data)
                 listGroup.isVisible = true
                 emptyView.root.isVisible = false
                 listProgress.root.isVisible = false
                 swipeToRefresh.isRefreshing = false
             }
-            Empty -> with(binding) {
+            MoviesListViewModel.ViewState.Empty -> with(binding) {
                 listGroup.isVisible = false
                 emptyView.root.isVisible = true
                 listProgress.root.isVisible = false
@@ -107,7 +104,7 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
                 emptyView.textTitle.text = "Ooooops!!!"         // TODO: 18.01.2021 поправить
                 emptyView.textDescription.text = "Empty data"
             }
-            is Error -> with(binding) {
+            is MoviesListViewModel.ViewState.Error -> with(binding) {
                 listGroup.isVisible = false
                 emptyView.root.isVisible = true
                 listProgress.root.isVisible = false

@@ -26,8 +26,6 @@ import com.trelp.aag2020.presentation.view.common.utils.dp2pxSize
 import com.trelp.aag2020.presentation.view.common.utils.loadImage
 import com.trelp.aag2020.presentation.viewmodel.details.ActorsListViewModel
 import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel
-import com.trelp.aag2020.presentation.viewmodel.details.ViewState
-import com.trelp.aag2020.presentation.viewmodel.details.ViewState.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -125,15 +123,15 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
         }
     }
 
-    private fun renderDetailsInfo(state: ViewState) {
+    private fun renderDetailsInfo(state: MovieDetailsViewModel.ViewState) {
         Timber.d(state.javaClass.simpleName)
         when (state) {
-            Loading -> Toast.makeText(
+            MovieDetailsViewModel.ViewState.Loading -> Toast.makeText(
                 requireContext(),
                 "Loading",
                 Toast.LENGTH_SHORT
             ).show()
-            is Data -> {
+            is MovieDetailsViewModel.ViewState.Data -> {
                 with(binding) {
                     imageMovieLogo.loadImage(state.data.backdropPath)
                     textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
@@ -148,7 +146,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
                     textMovieStorylineContent.text = state.data.overview
                 }
             }
-            is Error -> Toast.makeText(
+            is MovieDetailsViewModel.ViewState.Error -> Toast.makeText(
                 requireContext(),
                 "Error",
                 Toast.LENGTH_SHORT

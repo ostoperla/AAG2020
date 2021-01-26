@@ -3,9 +3,14 @@ package com.trelp.aag2020.presentation.viewmodel.details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.trelp.aag2020.domain.entity.MovieDetails
 import com.trelp.aag2020.domain.interactor.MovieInteractor
+import com.trelp.aag2020.presentation.viewmodel.common.BaseAction
 import com.trelp.aag2020.presentation.viewmodel.common.BaseViewModel
-import com.trelp.aag2020.presentation.viewmodel.details.ViewState.*
+import com.trelp.aag2020.presentation.viewmodel.common.BaseViewState
+import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel.Action
+import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel.ViewState
+import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel.ViewState.*
 import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel constructor(
@@ -40,6 +45,18 @@ class MovieDetailsViewModel constructor(
             Action.Refresh -> Loading
             else -> currentState
         }
+    }
+
+    sealed class Action : BaseAction {
+        object Refresh : Action()
+        data class LoadData(val data: MovieDetails) : Action()
+        data class Error(val error: Throwable) : Action()
+    }
+
+    sealed class ViewState : BaseViewState {
+        object Loading : ViewState()
+        data class Data(val data: MovieDetails) : ViewState()
+        data class Error(val error: Throwable) : ViewState()
     }
 
     companion object {

@@ -1,15 +1,17 @@
 package com.trelp.aag2020.presentation.viewmodel.movies
 
 import androidx.lifecycle.viewModelScope
+import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.domain.interactor.MovieInteractor
+import com.trelp.aag2020.presentation.viewmodel.common.BaseAction
 import com.trelp.aag2020.presentation.viewmodel.common.BaseViewModel
-import com.trelp.aag2020.presentation.viewmodel.movies.ViewState.*
+import com.trelp.aag2020.presentation.viewmodel.common.BaseViewState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MoviesListViewModel @Inject constructor(
     private val movieInteractor: MovieInteractor
-) : BaseViewModel<Action, ViewState>(EmptyProgress) {
+) : BaseViewModel<MoviesListViewModel.Action, MoviesListViewModel.ViewState>(ViewState.EmptyProgress) {
 
     init {
         loadMovies()
@@ -37,27 +39,42 @@ class MoviesListViewModel @Inject constructor(
     }
 
     override fun reducer(action: Action) = when (currentState) {
-        EmptyProgress -> when (action) {
-            is Action.LoadData -> Data(action.data)
-            is Action.EmptyData -> Empty
-            is Action.Error -> Error(action.error)
+        ViewState.EmptyProgress -> when (action) {
+            is Action.LoadData -> ViewState.Data(action.data)
+            is Action.EmptyData -> ViewState.Empty
+            is Action.Error -> ViewState.Error(action.error)
             else -> currentState
         }
-        is Refresh -> when (action) {
-            is Action.LoadData -> Data(action.data)
-            is Action.EmptyData -> Empty
-            is Action.Error -> Error(action.error)
+        is ViewState.Refresh -> when (action) {
+            is Action.LoadData -> ViewState.Data(action.data)
+            is Action.EmptyData -> ViewState.Empty
+            is Action.Error -> ViewState.Error(action.error)
             else -> currentState
         }
-        is Data -> when (action) {
-            Action.Refresh -> Refresh
-            is Action.LoadData -> Data(action.data)
-            is Action.EmptyData -> Empty
-            is Action.Error -> Error(action.error)
+        is ViewState.Data -> when (action) {
+            Action.Refresh -> ViewState.Refresh
+            is Action.LoadData -> ViewState.Data(action.data)
+            is Action.EmptyData -> ViewState.Empty
+            is Action.Error -> ViewState.Error(action.error)
         }
-        Empty, is Error -> when (action) {
-            Action.Refresh -> EmptyProgress
+        ViewState.Empty, is ViewState.Error -> when (action) {
+            Action.Refresh -> ViewState.EmptyProgress
             else -> currentState
         }
+    }
+
+    sealed class Action : BaseAction {
+        object Refresh : Action()
+        data class LoadData(val data: List<Movie>) : Action()
+        object EmptyData : Action()
+        data class Error(val error: Throwable) : Action()
+    }
+
+    sealed class ViewState : BaseViewState {
+        object EmptyProgress : ViewState()
+        object Refresh : ViewState()
+        data class Data(val data: List<Movie>) : ViewState()
+        object Empty : ViewState()
+        data class Error(val error: Throwable) : ViewState()
     }
 }
