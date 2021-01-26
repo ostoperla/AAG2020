@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Actor(
+data class ActorDto(
     val id: Int,
     val name: String,
     @SerialName("profile_path")

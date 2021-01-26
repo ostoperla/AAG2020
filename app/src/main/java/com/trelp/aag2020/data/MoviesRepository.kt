@@ -1,5 +1,8 @@
 package com.trelp.aag2020.data
 
+import com.trelp.aag2020.data.model.ActorDto
+import com.trelp.aag2020.data.model.GenreDto
+import com.trelp.aag2020.data.model.MovieDto
 import com.trelp.aag2020.data.storage.LocalDataSource
 import com.trelp.aag2020.domain.entity.Actor
 import com.trelp.aag2020.domain.entity.Genre
@@ -9,9 +12,6 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.system.measureTimeMillis
-import com.trelp.aag2020.data.model.Actor as ResponseActor
-import com.trelp.aag2020.data.model.Genre as ResponseGenre
-import com.trelp.aag2020.data.model.Movie as ResponseMovie
 
 class MoviesRepository @Inject constructor(
     private val localDataSource: LocalDataSource
@@ -22,7 +22,7 @@ class MoviesRepository @Inject constructor(
 
         val time = measureTimeMillis {
 
-            val actorsMap = localDataSource.loadData<ResponseActor>("people.json")
+            val actorsMap = localDataSource.loadData<ActorDto>("people.json")
                 .map {
                     Actor(
                         id = it.id,
@@ -32,7 +32,7 @@ class MoviesRepository @Inject constructor(
                 }
                 .associateBy { it.id }
 
-            val genresMap = localDataSource.loadData<ResponseGenre>("genres.json")
+            val genresMap = localDataSource.loadData<GenreDto>("genres.json")
                 .map {
                     Genre(
                         id = it.id,
@@ -41,7 +41,7 @@ class MoviesRepository @Inject constructor(
                 }
                 .associateBy { it.id }
 
-            movies = localDataSource.loadData<ResponseMovie>("data.json")
+            movies = localDataSource.loadData<MovieDto>("data.json")
                 .map { jsonMovie ->
                     Movie(
                         id = jsonMovie.id,
@@ -53,11 +53,11 @@ class MoviesRepository @Inject constructor(
                         numberOfRatings = jsonMovie.votesCount,
                         minimumAge = if (jsonMovie.adult) 16 else 13,
                         runtime = jsonMovie.runtime,
-                        genres = jsonMovie.genreIds.map {
-                            genresMap[it] ?: throw IllegalArgumentException("Genre not found")
+                        genres = jsonMovie.genreIds.mapNotNull {
+                            genresMap[it]
                         },
-                        actors = jsonMovie.actors.map {
-                            actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
+                        actors = jsonMovie.actors.mapNotNull {
+                            actorsMap[it]
                         }
                     )
                 }

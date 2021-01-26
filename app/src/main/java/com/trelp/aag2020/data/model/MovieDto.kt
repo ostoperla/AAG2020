@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Movie(
+data class MovieDto(
     val id: Int,
     val title: String,
     @SerialName("poster_path")
