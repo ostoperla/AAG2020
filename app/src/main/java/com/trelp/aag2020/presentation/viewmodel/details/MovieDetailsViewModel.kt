@@ -3,7 +3,6 @@ package com.trelp.aag2020.presentation.viewmodel.details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.trelp.aag2020.data.MoviesRepository
 import com.trelp.aag2020.domain.entity.Movie
@@ -25,22 +24,6 @@ class MovieDetailsViewModel constructor(
     private fun loadMovieDetails() {
         viewModelScope.launch {
             _movie.value = moviesRepository.loadMovie(movieId)
-        }
-    }
-
-    companion object {
-        fun factory(
-            moviesRepository: MoviesRepository,
-            movieId: Int
-        ) = object : ViewModelProvider.Factory {
-
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel?> create(modelClass: Class<T>) =
-                if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
-                    MovieDetailsViewModel(moviesRepository, movieId) as T
-                } else {
-                    throw IllegalArgumentException("Unknown ViewModel class: $modelClass")
-                }
         }
     }
 }

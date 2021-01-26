@@ -23,6 +23,7 @@ import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxSize
 import com.trelp.aag2020.presentation.view.common.utils.loadImage
 import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel
+import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModelFactory
 import javax.inject.Inject
 
 class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
@@ -35,7 +36,7 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
     lateinit var moviesRepository: MoviesRepository
 
     private val viewModel: MovieDetailsViewModel by viewModels {
-        MovieDetailsViewModel.factory(moviesRepository, arguments?.getInt(ARG_MOVIE_ID) ?: 0)
+        MovieDetailsViewModelFactory(moviesRepository, arguments?.getInt(ARG_MOVIE_ID) ?: 0)
     }
 
     private val actorAdapter by lazy { ActorAdapter() }
