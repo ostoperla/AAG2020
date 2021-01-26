@@ -55,8 +55,7 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
         scope.launch {
             context?.applicationContext?.let { context ->
                 val movies = loadMovies(context)
-                binding.listMovie.adapter =
-                    movieAdapter.also { it.submitList(movies) }
+                movieAdapter.submitList(movies)
             }
         }
     }
@@ -69,6 +68,7 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
     private fun initMoviesList() {
         with(binding.listMovie) {
             setHasFixedSize(true)
+            adapter = movieAdapter
             addItemDecoration(
                 MovieOffsetItemDecoration(context.dp2pxOffset(R.dimen.item_movie_offset))
             )
