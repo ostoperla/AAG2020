@@ -1,7 +1,6 @@
 package com.trelp.aag2020.data.network
 
 import com.trelp.aag2020.data.model.CastResponse
-import com.trelp.aag2020.data.model.ConfigurationResponse
 import com.trelp.aag2020.data.model.GenresResponse
 import com.trelp.aag2020.data.model.MovieDetailsResponse
 import com.trelp.aag2020.data.model.MoviesResponse
@@ -9,9 +8,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface TmdbAPI {
-
-    @GET("configuration")
-    suspend fun getConfiguration(): ConfigurationResponse
 
     @GET("movie/now_playing")
     suspend fun getNowPlaying(): MoviesResponse

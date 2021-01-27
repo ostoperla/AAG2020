@@ -6,6 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CastResponse(
     @SerialName("id") val id: Int,
-    @SerialName("cast") val cast: List<Cast>,
-    @SerialName("crew") val crew: List<Crew>
+    @SerialName("cast") val cast: List<Cast>
 )
