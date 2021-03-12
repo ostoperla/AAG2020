@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trelp.aag2020.R
 import com.trelp.aag2020.domain.entity.Movie
-import com.trelp.aag2020.domain.entity.isSame
 import com.trelp.aag2020.databinding.FragmentMoviesListBinding
 import com.trelp.aag2020.di.ComponentOwner
 import com.trelp.aag2020.di.Injector
@@ -36,12 +35,7 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
 
     private var itemClickListener: OnItemClickListener? = null
 
-    private val movieAdapter by lazy {
-        MovieAdapter(
-            { old, new -> old.isSame(new) },
-            itemClickListener
-        )
-    }
+    private val movieAdapter by lazy { MovieAdapter(itemClickListener) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -67,9 +61,16 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
         binding.listMovie.adapter = movieAdapter.also { it.submitList(data) }
     }
 
+    override fun onDestroyView() {
+        binding.listMovie.adapter = null
+
+        super.onDestroyView()
+    }
+
     private fun initMoviesList() {
         with(binding.listMovie) {
             setHasFixedSize(true)
+            adapter = movieAdapter
             addItemDecoration(
                 MovieOffsetItemDecoration(context.dp2pxOffset(R.dimen.item_movie_offset))
             )
