@@ -5,15 +5,23 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trelp.aag2020.R
-import com.trelp.aag2020.data.MoviesDataSource
+import com.trelp.aag2020.data.Movie
+import com.trelp.aag2020.data.loadMovies
 import com.trelp.aag2020.databinding.FragmentMoviesListBinding
 import com.trelp.aag2020.ui.common.BaseFragment
 import com.trelp.aag2020.ui.common.utils.dp2pxOffset
+import kotlinx.coroutines.*
 
 class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
 
+    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+
     private val binding
         get() = viewBinding!! as FragmentMoviesListBinding
+
+    interface OnItemClickListener {
+        fun onItemClick(movie: Movie)
+    }
 
     private var itemClickListener: OnItemClickListener? = null
 
@@ -38,7 +46,17 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
     override fun onStart() {
         super.onStart()
 
-        movieAdapter.submitList(MoviesDataSource().movies)
+        scope.launch {
+            context?.applicationContext?.let { context ->
+                val movies = loadMovies(context)
+                movieAdapter.submitList(movies)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel()
     }
 
     override fun onDetach() {
@@ -62,10 +80,6 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
             )
             layoutManager = GridLayoutManager(context, SPAN_COUNT)
         }
-    }
-
-    interface OnItemClickListener {
-        fun onItemClick(movieId: Int)
     }
 
     companion object {

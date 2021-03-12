@@ -8,6 +8,7 @@
     <string name="movie_logo_description">Movie logo</string>
     <string name="movies_list_title">Movies list</string>
     <string name="movie_duration">%1$d min</string>
+    <string name="movie_age_limit">%1$d+</string>
     <plurals name="movie_reviews">
         <item quantity="one">%1$d review</item>
         <item quantity="other">%1$d reviews</item>

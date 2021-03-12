@@ -1,20 +1,21 @@
 package com.trelp.aag2020.data
 
-import androidx.annotation.DrawableRes
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Movie(
     val id: Int,
-    @DrawableRes val posterSmall: Int,
-    @DrawableRes val poster: Int,
-    val ageLimit: String,
     val title: String,
-    val tags: String,
-    val rating: Float,
-    val reviewCount: Int,
-    val isLike: Boolean,
-    val duration: Int,
     val overview: String,
+    val poster: String,
+    val backdrop: String,
+    val ratings: Float,
+    val numberOfRatings: Int,
+    val minimumAge: Int,
+    val runtime: Int,
+    val genres: List<Genre>,
     val actors: List<Actor>
-)
+) : Parcelable
 
 fun Movie.isSame(other: Movie) = id == other.id
