@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Movie(
+data class MovieDto(
     @SerialName("adult") val adult: Boolean,
     @SerialName("genre_ids") val genreIds: List<Int>,
     @SerialName("id") val id: Int,

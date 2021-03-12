@@ -1,7 +1,8 @@
 package com.trelp.aag2020.data.mapper
 
-import com.trelp.aag2020.data.model.Movie
+import com.trelp.aag2020.data.model.MovieDto
 import com.trelp.aag2020.domain.entity.Genre
+import com.trelp.aag2020.domain.entity.Movie
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -9,10 +10,10 @@ class MovieMapper @Inject constructor(
     private val imageUrlMapper: ImageUrlMapper
 ) {
     fun map(
-        movie: Movie,
+        movie: MovieDto,
         genresMap: Map<Int, Genre>
-    ): com.trelp.aag2020.domain.entity.Movie {
-        return com.trelp.aag2020.domain.entity.Movie(
+    ): Movie {
+        return Movie(
             id = movie.id,
             minimumAge = if (movie.adult) AGE_16 else AGE_13,
             posterPath = imageUrlMapper.map(IMAGE_SIZE, movie.posterPath),

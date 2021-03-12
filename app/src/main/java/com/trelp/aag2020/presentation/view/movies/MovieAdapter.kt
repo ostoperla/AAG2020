@@ -1,11 +1,13 @@
 package com.trelp.aag2020.presentation.view.movies
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.trelp.aag2020.R
 import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.databinding.ItemMovieNormalBinding
-import com.trelp.aag2020.presentation.view.common.adapter.AsyncListDifferAdapter
+import com.trelp.aag2020.domain.entity.isSame
 import com.trelp.aag2020.presentation.view.common.utils.context
 import com.trelp.aag2020.presentation.view.common.utils.inflater
 import com.trelp.aag2020.presentation.view.common.utils.loadImage
@@ -13,9 +15,8 @@ import com.trelp.aag2020.presentation.view.common.utils.tint
 import com.trelp.aag2020.presentation.view.movies.MovieAdapter.MovieHolder
 
 class MovieAdapter(
-    itemDiff: (old: Movie, new: Movie) -> Boolean,
     private val itemClickListener: FragmentMoviesList.OnItemClickListener?
-) : AsyncListDifferAdapter<Movie, MovieHolder>(itemDiff) {
+) : ListAdapter<Movie, MovieHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
         return MovieHolder(
@@ -54,6 +55,18 @@ class MovieAdapter(
                 textMovieName.text = movie.title
                 textMovieDuration.text =
                     itemView.context.resources.getString(R.string.movie_duration, movie.runtime)
+            }
+        }
+    }
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return if (oldItem === newItem) true else oldItem.isSame(newItem)
+            }
+
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem == newItem
             }
         }
     }

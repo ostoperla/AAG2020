@@ -18,7 +18,6 @@ import com.trelp.aag2020.di.ComponentOwner
 import com.trelp.aag2020.di.Injector
 import com.trelp.aag2020.di.activity.ActivityComponent
 import com.trelp.aag2020.di.details.DetailsComponent
-import com.trelp.aag2020.domain.entity.MovieDetails
 import com.trelp.aag2020.domain.interactor.ActorInteractor
 import com.trelp.aag2020.domain.interactor.MovieInteractor
 import com.trelp.aag2020.presentation.view.common.BaseFragment
@@ -27,6 +26,7 @@ import com.trelp.aag2020.presentation.view.common.utils.loadImage
 import com.trelp.aag2020.presentation.viewmodel.details.ActorsListViewModel
 import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel
 import timber.log.Timber
+import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModelFactory
 import javax.inject.Inject
 
 class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
@@ -43,11 +43,12 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
     @Inject
     lateinit var actorInteractor: ActorInteractor
 
-    private val detailsViewModel: MovieDetailsViewModel by viewModels {
-        MovieDetailsViewModel.factory(movieInteractor, arguments?.getInt(ARG_MOVIE_ID) ?: 0)
-    }
     private val actorsViewModel: ActorsListViewModel by viewModels {
         ActorsListViewModel.factory(actorInteractor, arguments?.getInt(ARG_MOVIE_ID) ?: 0)
+    }
+
+    private val detailsViewModel: MovieDetailsViewModel by viewModels {
+        MovieDetailsViewModelFactory(movieInteractor, arguments?.getInt(ARG_MOVIE_ID) ?: 0)
     }
 
     private val actorAdapter by lazy { ActorAdapter() }
@@ -70,26 +71,10 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
 
         initActorsList()
 
+        binding.textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
+
         detailsViewModel.stateLiveData.observe(viewLifecycleOwner) { renderDetailsInfo(it) }
         actorsViewModel.stateLiveData.observe(viewLifecycleOwner) { renderActorsList(it) }
-    }
-
-    private fun setupDetails(movie: MovieDetails?) {
-        with(binding) {
-            movie?.let {
-                imageMovieLogo.loadImage(it.backdropPath)
-                textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
-                textMovieRatingSystem.text = it.minimumAge.toString()
-                textMovieName.text = it.title
-                textMovieTags.text = it.genres.joinToString { genre -> genre.name }
-                textMovieReviews.text = resources.getQuantityString(
-                    R.plurals.movie_reviews,
-                    it.voteCount,
-                    it.voteCount
-                )
-                textMovieStorylineContent.text = it.overview
-            }
-        }
     }
 
     private fun renderActorsList(state: ActorsListViewModel.ViewState) {
@@ -134,7 +119,6 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details),
             is MovieDetailsViewModel.ViewState.Data -> {
                 with(binding) {
                     imageMovieLogo.loadImage(state.data.backdropPath)
-                    textMovieBack.setOnClickListener { backButtonClickListener?.onBackButtonClick() }
                     textMovieRatingSystem.text = state.data.minimumAge.toString()
                     textMovieName.text = state.data.title
                     textMovieTags.text = state.data.genres.joinToString { genre -> genre.name }

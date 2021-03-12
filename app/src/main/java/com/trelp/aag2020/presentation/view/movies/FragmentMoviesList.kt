@@ -8,13 +8,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trelp.aag2020.R
-import com.trelp.aag2020.domain.entity.isSame
+import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.databinding.FragmentMoviesListBinding
 import com.trelp.aag2020.di.ComponentOwner
 import com.trelp.aag2020.di.Injector
 import com.trelp.aag2020.di.activity.ActivityComponent
 import com.trelp.aag2020.di.movies.MoviesComponent
-import com.trelp.aag2020.domain.entity.Movie
 import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxOffset
 import com.trelp.aag2020.presentation.viewmodel.movies.MoviesListViewModel
@@ -38,12 +37,7 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
 
     private var itemClickListener: OnItemClickListener? = null
 
-    private val movieAdapter by lazy {
-        MovieAdapter(
-            { old, new -> old.isSame(new) },
-            itemClickListener
-        )
-    }
+    private val movieAdapter by lazy { MovieAdapter(itemClickListener) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

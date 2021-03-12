@@ -1,7 +1,5 @@
 package com.trelp.aag2020.presentation.viewmodel.details
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.trelp.aag2020.domain.entity.MovieDetails
 import com.trelp.aag2020.domain.interactor.MovieInteractor
@@ -57,21 +55,5 @@ class MovieDetailsViewModel constructor(
         object Loading : ViewState()
         data class Data(val data: MovieDetails) : ViewState()
         data class Error(val error: Throwable) : ViewState()
-    }
-
-    companion object {
-        fun factory(
-            movieInteractor: MovieInteractor,
-            movieId: Int
-        ) = object : ViewModelProvider.Factory {
-
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel?> create(modelClass: Class<T>) =
-                if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
-                    MovieDetailsViewModel(movieInteractor, movieId) as T
-                } else {
-                    throw IllegalArgumentException("Unknown ViewModel class: $modelClass")
-                }
-        }
     }
 }
