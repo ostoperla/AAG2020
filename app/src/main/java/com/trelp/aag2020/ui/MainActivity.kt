@@ -2,6 +2,7 @@ package com.trelp.aag2020.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -28,11 +29,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         }
     }
 
-    private fun navigateToMovieDetails() {
+    private fun navigateToMovieDetails(movieId: Int) {
+        val bundle = bundleOf(FragmentMovieDetails.ARG_MOVIE_ID to movieId)
         supportFragmentManager.commit {
             addToBackStack(null)
             setReorderingAllowed(true)
-            replace<FragmentMovieDetails>(R.id.fragment_container)
+            replace<FragmentMovieDetails>(R.id.fragment_container, args = bundle)
         }
     }
 
@@ -40,8 +42,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         supportFragmentManager.popBackStack()
     }
 
-    override fun onItemClick() {
-        navigateToMovieDetails()
+    override fun onItemClick(movieId: Int) {
+        navigateToMovieDetails(movieId)
     }
 
     override fun onBackButtonClick() {

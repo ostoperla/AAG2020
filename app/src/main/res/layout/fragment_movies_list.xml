@@ -15,12 +15,17 @@
         android:text="@string/movies_list_title"
         android:textAppearance="@style/TextAppearance.AAG2020.Headline1" />
 
-    <include
-        android:id="@+id/item_movie"
-        layout="@layout/item_movie_normal"
-        android:layout_width="@dimen/fake_item_movie_width"
-        android:layout_height="@dimen/fake_item_movie_height"
-        android:layout_marginStart="@dimen/fake_item_movie_margin_start"
-        android:layout_marginTop="@dimen/margin_extra_large" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_movie_offset"
+        android:layout_marginTop="@dimen/margin_extra_large"
+        android:layout_marginEnd="@dimen/item_movie_offset"
+        android:layout_marginBottom="@dimen/item_movie_offset"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/item_movie_normal"
+        tools:orientation="vertical"
+        tools:spanCount="2" />
 
 </LinearLayout>
