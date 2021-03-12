@@ -26,12 +26,16 @@ class FragmentMovieDetails : BaseFragment(R.layout.fragment_movie_details) {
     private val actorAdapter by lazy { ActorAdapter() }
     private var backButtonClickListener: OnBackButtonClick? = null
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         arguments?.let {
             movie = it.getParcelable(ARG_MOVIE)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
         backButtonClickListener =
             if (context is OnBackButtonClick) context

@@ -9,7 +9,7 @@ import com.trelp.aag2020.ui.common.utils.loadImage
 
 class ActorAdapter : RecyclerView.Adapter<ActorAdapter.ActorHolder>() {
 
-    private var data = listOf<Actor>()
+    private val data = mutableListOf<Actor>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorHolder {
         return ActorHolder(
@@ -24,7 +24,8 @@ class ActorAdapter : RecyclerView.Adapter<ActorAdapter.ActorHolder>() {
     override fun getItemCount() = data.size
 
     fun setupData(newData: List<Actor>) {
-        data = newData
+        data.clear()
+        data.plusAssign(newData)
         notifyDataSetChanged()
     }
 

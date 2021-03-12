@@ -6,7 +6,6 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trelp.aag2020.R
 import com.trelp.aag2020.data.Movie
-import com.trelp.aag2020.data.isSame
 import com.trelp.aag2020.data.loadMovies
 import com.trelp.aag2020.databinding.FragmentMoviesListBinding
 import com.trelp.aag2020.ui.common.BaseFragment
@@ -26,12 +25,7 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
 
     private var itemClickListener: OnItemClickListener? = null
 
-    private val movieAdapter by lazy {
-        MovieAdapter(
-            { old, new -> old.isSame(new) },
-            itemClickListener
-        )
-    }
+    private val movieAdapter by lazy { MovieAdapter(itemClickListener) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -65,6 +59,18 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
         scope.cancel()
     }
 
+    override fun onDetach() {
+        itemClickListener = null
+
+        super.onDetach()
+    }
+
+    override fun onDestroyView() {
+        binding.listMovie.adapter = null
+
+        super.onDestroyView()
+    }
+
     private fun initMoviesList() {
         with(binding.listMovie) {
             setHasFixedSize(true)
@@ -74,12 +80,6 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list) {
             )
             layoutManager = GridLayoutManager(context, SPAN_COUNT)
         }
-    }
-
-    override fun onDetach() {
-        itemClickListener = null
-
-        super.onDetach()
     }
 
     companion object {
