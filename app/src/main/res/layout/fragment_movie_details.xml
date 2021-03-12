@@ -37,7 +37,7 @@
             android:id="@+id/image_movie_logo"
             style="@style/Widget.AAG2020.ImageView.MovieLogo"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/image_movie_logo_height"
             android:contentDescription="@string/movie_logo_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -224,6 +224,16 @@
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:orientation="horizontal"
             tools:listitem="@layout/item_actor" />
+
+        <include
+            android:id="@+id/list_progress"
+            layout="@layout/layout_progress"
+            android:layout_width="@dimen/actors_progress_width"
+            android:layout_height="@dimen/actors_progress_height"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_cast"
+            app:layout_constraintStart_toStartOf="@id/guideline_root_left"
+            app:layout_constraintEnd_toEndOf="@id/guideline_root_right"
+            app:layout_constraintBottom_toTopOf="@id/guideline_root_bottom"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

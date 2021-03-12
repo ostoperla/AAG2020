@@ -3,6 +3,7 @@ package com.trelp.aag2020.presentation.view.movies
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,6 +17,7 @@ import com.trelp.aag2020.di.movies.MoviesComponent
 import com.trelp.aag2020.presentation.view.common.BaseFragment
 import com.trelp.aag2020.presentation.view.common.utils.dp2pxOffset
 import com.trelp.aag2020.presentation.viewmodel.movies.MoviesListViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
@@ -54,17 +56,57 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
 
         initMoviesList()
 
-        viewModel.movies.observe(viewLifecycleOwner) { updateMoviesList(it) }
+        viewModel.stateLiveData.observe(viewLifecycleOwner) { renderState(it) }
+
+        with(binding) {
+            swipeToRefresh.setOnRefreshListener { viewModel.refreshMovies() }
+            emptyView.btnRefresh.setOnClickListener { viewModel.refreshMovies() }
+        }
     }
 
     private fun updateMoviesList(data: List<Movie>) {
-        binding.listMovie.adapter = movieAdapter.also { it.submitList(data) }
+        movieAdapter.submitList(data)
     }
 
-    override fun onDestroyView() {
-        binding.listMovie.adapter = null
-
-        super.onDestroyView()
+    private fun renderState(state: MoviesListViewModel.ViewState) {
+        Timber.d(state.javaClass.simpleName)
+        when (state) {
+            MoviesListViewModel.ViewState.EmptyProgress -> with(binding) {
+                listGroup.isVisible = false
+                emptyView.root.isVisible = false
+                listProgress.root.isVisible = true
+                swipeToRefresh.isRefreshing = false
+            }
+            MoviesListViewModel.ViewState.Refresh -> with(binding) {
+                listGroup.isVisible = true
+                emptyView.root.isVisible = false
+                listProgress.root.isVisible = false
+                swipeToRefresh.isRefreshing = true
+            }
+            is MoviesListViewModel.ViewState.Data -> with(binding) {
+                updateMoviesList(state.data)
+                listGroup.isVisible = true
+                emptyView.root.isVisible = false
+                listProgress.root.isVisible = false
+                swipeToRefresh.isRefreshing = false
+            }
+            MoviesListViewModel.ViewState.Empty -> with(binding) {
+                listGroup.isVisible = false
+                emptyView.root.isVisible = true
+                listProgress.root.isVisible = false
+                swipeToRefresh.isRefreshing = false
+                emptyView.textTitle.text = "Ooooops!!!"         // TODO: 18.01.2021 поправить
+                emptyView.textDescription.text = "Empty data"
+            }
+            is MoviesListViewModel.ViewState.Error -> with(binding) {
+                listGroup.isVisible = false
+                emptyView.root.isVisible = true
+                listProgress.root.isVisible = false
+                swipeToRefresh.isRefreshing = false
+                emptyView.textTitle.text = "Ooooops!!!"         // TODO: 18.01.2021 поправить
+                emptyView.textDescription.text = "Error ${state.error}"
+            }
+        }
     }
 
     private fun initMoviesList() {
@@ -82,6 +124,12 @@ class FragmentMoviesList : BaseFragment(R.layout.fragment_movies_list),
         itemClickListener = null
 
         super.onDetach()
+    }
+
+    override fun onDestroyView() {
+        binding.listMovie.adapter = null
+
+        super.onDestroyView()
     }
 
     override fun createComponent() =

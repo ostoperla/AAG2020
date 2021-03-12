@@ -35,7 +35,7 @@ class ActorAdapter : RecyclerView.Adapter<ActorAdapter.ActorHolder>() {
 
         fun bind(actor: Actor) {
             with(binding) {
-                imageActorPhoto.loadImage(actor.picture)
+                imageActorPhoto.loadImage(actor.profilePath)
                 textActorName.text = actor.name
             }
         }

@@ -1,21 +1,20 @@
 package com.trelp.aag2020.presentation.viewmodel.details
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.trelp.aag2020.data.MoviesRepository
-import com.trelp.aag2020.domain.entity.Movie
+import com.trelp.aag2020.domain.entity.MovieDetails
+import com.trelp.aag2020.domain.interactor.MovieInteractor
+import com.trelp.aag2020.presentation.viewmodel.common.BaseAction
+import com.trelp.aag2020.presentation.viewmodel.common.BaseViewModel
+import com.trelp.aag2020.presentation.viewmodel.common.BaseViewState
+import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel.Action
+import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel.ViewState
+import com.trelp.aag2020.presentation.viewmodel.details.MovieDetailsViewModel.ViewState.*
 import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel constructor(
-    private val moviesRepository: MoviesRepository,
+    private val movieInteractor: MovieInteractor,
     private val movieId: Int,
-) : ViewModel() {
-
-    private val _movie = MutableLiveData<Movie>()
-    val movie: LiveData<Movie>
-        get() = _movie
+) : BaseViewModel<Action, ViewState>(Loading) {
 
     init {
         loadMovieDetails()
@@ -23,7 +22,38 @@ class MovieDetailsViewModel constructor(
 
     private fun loadMovieDetails() {
         viewModelScope.launch {
-            _movie.value = moviesRepository.loadMovie(movieId)
+            val action = try {
+                val details = movieInteractor.getMovieDetails(movieId)
+                Action.LoadData(details)
+            } catch (e: Throwable) {
+                Action.Error(e)
+            }
+            proceed(action)
         }
+    }
+
+    override fun reducer(action: Action) = when (currentState) {
+        Loading -> when (action) {
+            is Action.LoadData -> Data(action.data)
+            is Action.Error -> Error(action.error)
+            else -> currentState
+        }
+        is Data -> currentState
+        is Error -> when (action) {
+            Action.Refresh -> Loading
+            else -> currentState
+        }
+    }
+
+    sealed class Action : BaseAction {
+        object Refresh : Action()
+        data class LoadData(val data: MovieDetails) : Action()
+        data class Error(val error: Throwable) : Action()
+    }
+
+    sealed class ViewState : BaseViewState {
+        object Loading : ViewState()
+        data class Data(val data: MovieDetails) : ViewState()
+        data class Error(val error: Throwable) : ViewState()
     }
 }

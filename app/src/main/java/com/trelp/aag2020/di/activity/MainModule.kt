@@ -1,42 +1,69 @@
 package com.trelp.aag2020.di.activity
 
-import android.content.Context
-import android.content.res.AssetManager
-import com.trelp.aag2020.data.MoviesRepository
-import com.trelp.aag2020.data.storage.LocalDataSource
+import com.trelp.aag2020.data.repository.ActorRepositoryImpl
+import com.trelp.aag2020.data.AppDispatchers
+import com.trelp.aag2020.data.DispatchersProvider
+import com.trelp.aag2020.data.mapper.ActorMapper
+import com.trelp.aag2020.data.mapper.GenreMapper
+import com.trelp.aag2020.data.mapper.ImageUrlMapper
+import com.trelp.aag2020.data.mapper.MovieDetailsMapper
+import com.trelp.aag2020.data.mapper.MovieMapper
+import com.trelp.aag2020.data.repository.MovieRepositoryImpl
 import com.trelp.aag2020.di.ActivityScope
-import com.trelp.aag2020.di.AppContext
+import com.trelp.aag2020.domain.repository.ActorRepository
+import com.trelp.aag2020.domain.repository.MovieRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import kotlinx.serialization.json.Json
 
 @Module
-object MainModule {
+abstract class MainModule {
 
-    @Provides
+    @Binds
     @ActivityScope
-    fun provideJson(): Json {
-        return Json { ignoreUnknownKeys = true }
-    }
+    abstract fun bindDispatchers(dispatchersImpl: AppDispatchers): DispatchersProvider
 
-    @Provides
+    @Binds
     @ActivityScope
-    fun provideAssetManager(@AppContext context: Context): AssetManager {
-        return context.assets
-    }
+    abstract fun bindMovieRepository(movieRepositoryImpl: MovieRepositoryImpl): MovieRepository
 
-    @Provides
+    @Binds
     @ActivityScope
-    fun provideLocalDataSource(
-        assetManager: AssetManager,
-        json: Json
-    ): LocalDataSource {
-        return LocalDataSource(assetManager, json)
-    }
+    abstract fun bindActorRepository(actorRepositoryImpl: ActorRepositoryImpl): ActorRepository
 
-    @Provides
-    @ActivityScope
-    fun provideMoviesRepository(localDataSource: LocalDataSource): MoviesRepository {
-        return MoviesRepository(localDataSource)
+    companion object {
+
+        @Provides
+        @ActivityScope
+        fun provideGenreMapper(): GenreMapper {
+            return GenreMapper()
+        }
+
+        @Provides
+        @ActivityScope
+        fun provideImageUrlMapper(): ImageUrlMapper {
+            return ImageUrlMapper()
+        }
+
+        @Provides
+        @ActivityScope
+        fun provideMovieMapper(imageUrlMapper: ImageUrlMapper): MovieMapper {
+            return MovieMapper(imageUrlMapper)
+        }
+
+        @Provides
+        @ActivityScope
+        fun provideMovieDetailsMapper(
+            imageUrlMapper: ImageUrlMapper,
+            genreMapper: GenreMapper
+        ): MovieDetailsMapper {
+            return MovieDetailsMapper(imageUrlMapper, genreMapper)
+        }
+
+        @Provides
+        @ActivityScope
+        fun provideActorMapper(imageUrlMapper: ImageUrlMapper): ActorMapper {
+            return ActorMapper(imageUrlMapper)
+        }
     }
 }
