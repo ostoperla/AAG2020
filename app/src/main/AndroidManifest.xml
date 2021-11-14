@@ -15,6 +15,7 @@
         <activity
             android:name="com.trelp.aag2020.presentation.view.MainActivity"
             android:theme="@style/Theme.AAG2020.Splash"
+            android:exported="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
