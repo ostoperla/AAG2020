@@ -10,7 +10,7 @@ class MovieDetailsViewModelFactory(
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>) =
+    override fun <T : ViewModel> create(modelClass: Class<T>) =
         if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
             MovieDetailsViewModel(movieInteractor, movieId) as T
         } else {

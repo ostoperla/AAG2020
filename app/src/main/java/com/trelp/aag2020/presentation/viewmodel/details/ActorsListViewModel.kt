@@ -78,7 +78,7 @@ class ActorsListViewModel constructor(
         ) = object : ViewModelProvider.Factory {
 
             @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel?> create(modelClass: Class<T>) =
+            override fun <T : ViewModel> create(modelClass: Class<T>) =
                 if (modelClass.isAssignableFrom(ActorsListViewModel::class.java)) {
                     ActorsListViewModel(actorInteractor, movieId) as T
                 } else {
